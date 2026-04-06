@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Langmaster • IELTS Reading | Learning to Walk & Yawning</title>
+    <style>
+        /* Import font hiện đại, sạch sẽ */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg: #ffffff;
+            /* Trắng tinh khôi */
+            --text: #1a1a1a;
+            /* Đen gần như tuyệt đối */
+            --accent: #000000;
+            /* Đen thuần cho điểm nhấn */
+            --border: #e0e0e0;
+            /* Xám nhạt cho đường kẻ */
+            --hover: #f5f5f5;
+            /* Xám cực nhẹ khi hover */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--accent);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            /* Gộp các tab lại thành một khối */
+            margin-bottom: 40px;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: white;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            color: #666;
+        }
+
+        .tab:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .tab:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .content {
+            max-width: 850px;
+            /* Thu hẹp lại để đọc dễ hơn */
+            margin: 0 auto;
+            padding: 0;
+            /* Bỏ padding ngoài để minimalist hơn */
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .passage {
+            font-size: 1.1rem;
+            text-align: left;
+            /* Căn lề trái hiện đại hơn căn đều */
+            color: #333;
+        }
+
+        .vocab {
+            font-weight: 600;
+            color: #0056b3;
+            /* Màu xanh đậm hiện đại, đủ nổi bật nhưng vẫn chuyên nghiệp */
+            border-bottom: 2px solid rgba(0, 86, 179, 0.2);
+            /* Gạch chân mờ để không bị rối mắt */
+            cursor: help;
+            position: relative;
+            transition: all 0.2s ease;
+            padding: 0 2px;
+        }
+
+        .vocab:hover {
+            color: #ffffff;
+            background: #0056b3;
+            /* Khi hover sẽ highlight toàn bộ từ */
+            border-bottom-color: transparent;
+            border-radius: 2px;
+        }
+
+        .vocab:hover::after {
+            content: attr(data-vn);
+            position: absolute;
+            bottom: 140%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            /* Tooltip đen tuyền */
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            white-space: nowrap;
+            z-index: 20;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--text);
+            padding: 12px 24px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .answers {
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--hover);
+            border-left: 4px solid var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">IELTS Reading</div>
+        <p style="margin-top:10px; color:#666;">Coded & Designed by DuGiaVăn</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab(1)">Passage 1</button>
+        <button class="tab" onclick="switchTab(2)">Passage 2</button>
+        <button class="tab" onclick="switchTab(3)">Passage 3</button>
+        <button class="tab" onclick="switchTab(4)">Passage 4</button>
+    </div>
+
+    <!-- PASSAGE 1 -->
+    <div id="tab1" class="content tab-content">
+        <h1>READING PASSAGE 1<br>Learning to Walk</h1>
+        <div class="passage" id="passage1">
+            These days the feet of a typical <span class="vocab" data-vn="cư dân đô thị / người sống ở thành phố">city
+                dweller</span> rarely
+            <span class="vocab" data-vn="chạm trán / đối mặt với (địa hình)">encounter</span> terrain bất kỳ more <span
+                class="vocab" data-vn="gồ ghề / không bằng phẳng">uneven</span> than a crack in the pavement.
+            While that may not seem like a problem, it turns out that by <span class="vocab"
+                data-vn="làm cho bằng phẳng / san phẳng">flattening</span> our urban environment we have put ourselves
+            at risk of a
+            surprising number of <span class="vocab" data-vn="bệnh mãn tính (kéo dài, khó chữa dứt)">chronic
+                illnesses</span> and disabilities.
+            Fortunately, the commercial market has come to the rescue with a choice of products.<br><br>
+
+            Research into the idea that flat floors could be <span class="vocab"
+                data-vn="có hại / bất lợi cho sức khỏe">detrimental</span> to
+            our health was <span class="vocab" data-vn="tiên phong / người đi đầu trong lĩnh vực">pioneered</span> back
+            in the late 1960s. <span class="vocab" data-vn="bác sĩ chuyên khoa chân">Podiatrist</span> Charles
+            Brantingham and <span class="vocab" data-vn="nhà sinh lý học">physiologist</span> Bruce Beekman were
+            concerned with the growing <span class="vocab" data-vn="nạn dịch / sự lan rộng của bệnh tật">epidemic</span>
+            of high blood pressure and reckoned they might be
+            linked to the <span class="vocab" data-vn="sự đồng nhất / tính đều đặn (không thay đổi)">uniformity</span>
+            of the surfaces we walk
+            on.<br><br>
+
+            The trouble, they believed, was that walking continuously on flat floors concentrates forces on just a few
+            areas of the foot. As a result, these surfaces are far more <span class="vocab"
+                data-vn="dẫn đến / tạo điều kiện thuận lợi cho">conducive to</span> <span class="vocab"
+                data-vn="hội chứng căng thẳng mãn tính">chronic stress syndromes</span> than
+            natural surfaces. They understood that the <span class="vocab"
+                data-vn="cấu trúc giải phẫu học">anatomy</span> of the
+            foot parallels that of the human hand and that modern lifestyles waste all this <span class="vocab"
+                data-vn="tiềm năng / khả năng tiềm ẩn">potential</span>
+            flexibility.<br><br>
+
+            Brantingham and Beekman became convinced that the damage could be <span class="vocab"
+                data-vn="được khắc phục / sửa chữa / điều chỉnh cho đúng">rectified</span> by making people <span
+                class="vocab" data-vn="lắc lư / đi đứng không vững">wobble</span>. They tested this by having factory
+            workers stand on spongy
+            mats with varying degrees of <span class="vocab" data-vn="kháng lực / lực cản">resistance</span>. This
+            simple <span class="vocab" data-vn="sự can thiệp (trong y học/nghiên cứu)">intervention</span> made a huge
+            difference; it activated a host of
+            muscles in their legs, which in turn helped pump blood back to their hearts and reduced stress on the
+            <span class="vocab" data-vn="hệ tuần hoàn / sự lưu thông máu">circulation</span>.<br><br>
+
+            Earlier this year, John Fisher and colleagues designed a mat intended to <span class="vocab"
+                data-vn="tái tạo / mô phỏng lại y hệt">replicate</span> the effect of walking on <span class="vocab"
+                data-vn="đá cuội (loại đá tròn dùng lát đường)">cobblestones</span>. After 16 weeks, participants showed
+            marked improvements in
+            <span class="vocab" data-vn="khả năng vận động / di chuyển">mobility</span> and a significant reduction in
+            blood pressure. The mats are now available for purchase and
+            production is being <span class="vocab" data-vn="mở rộng quy mô sản xuất">scaled up</span>.<br><br>
+
+            In China, spas and factories promote cobblestone paths as healthful <span class="vocab"
+                data-vn="tiện nghi / cơ sở vật chất hữu ích">amenities</span>. People in Europe are also <span
+                class="vocab" data-vn="đón nhận / nồng nhiệt hưởng ứng (ý tưởng)">embracing</span> the idea, visiting
+            "barefoot
+            parks" to walk on mud, logs, and moss. If none of these appeal, a new shoe called Masai Barefoot Technology
+            offers another option. These shoes have <span class="vocab"
+                data-vn="phần đế giày được làm tròn (hình vòng cung)">rounded soles</span> that
+            cause you to rock slightly when you stand still, exercising the small muscles around the ankle responsible
+            for <span class="vocab" data-vn="sự ổn định / tính thăng bằng">stability</span>.<br><br>
+
+            If the urban environment is <span class="vocab" data-vn="có hại / gây bất lợi">detrimental</span> to our
+            health, a far
+            simpler alternative is spending time in the countryside. However, for many citizens, the countryside is a
+            <span class="vocab" data-vn="đang cạn kiệt / giảm dần về số lượng">dwindling</span> resource as our concrete
+            cities grow at a
+            <span class="vocab" data-vn="đáng sợ / kinh khủng">terrifying</span> rate.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(1)">🔊 Đọc Passage 1</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <!-- PASSAGE 2 -->
+    <div id="tab2" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 2<br>Yawning</h1>
+        <div class="passage" id="passage2">
+            When Robert R Provine began studying yawning in the 1960s, it was difficult for him to <span class="vocab"
+                data-vn="thuyết phục">convince</span> research students of the <span class="vocab"
+                data-vn="giá trị/lợi ích">merits</span> of ‘yawning science’. Although it may appear <span class="vocab"
+                data-vn="kì quặc">quirky</span>, his research was a logical <span class="vocab"
+                data-vn="sự mở rộng">extension</span> of <span class="vocab"
+                data-vn="khoa học thần kinh phát triển">developmental neuroscience</span>.<br><br>
+
+            The verb ‘to yawn’ is derived from the Old English <span class="vocab" data-vn="há miệng">ganien</span>,
+            meaning to <span class="vocab" data-vn="há miệng rộng">gape</span> or open wide. Provine studied yawns by
+            using a variation of the <span class="vocab" data-vn="phản ứng lây lan">contagion response</span>, asking
+            people to 'think about yawning' to <span class="vocab" data-vn="kích hoạt">trigger</span> the act.<br><br>
+
+            Provine’s early discoveries: the yawn is highly <span class="vocab"
+                data-vn="cố định/rập khuôn">stereotyped</span> but not <span class="vocab"
+                data-vn="không thay đổi">invariant</span> in its duration. It is an excellent example of the instinctive
+            <span class="vocab" data-vn="hành vi cố định">fixed action pattern</span>. Once started, a yawn progresses
+            with the <span class="vocab" data-vn="tính tất yếu">inevitability</span> of a sneeze.<br><br>
+
+            There are no <span class="vocab" data-vn="ngáp nửa chừng">half-yawns</span>; this is why you cannot <span
+                class="vocab" data-vn="kìm nén">stifle</span> a yawn. Yawns can come in <span class="vocab"
+                data-vn="cơn">bouts</span> with a highly variable <span class="vocab"
+                data-vn="khoảng cách giữa các lần ngáp">inter-yawn interval</span> of about <span class="vocab"
+                data-vn="68 giây">68 seconds</span>.<br><br>
+
+            To understand its function, he tested three informative <span class="vocab"
+                data-vn="biến thể">variants</span>:<br>
+            1. <b>The closed nose yawn:</b> Subjects could still perform normal yawns, proving the nostrils are not
+            <span class="vocab" data-vn="thiết yếu">essential</span>.<br>
+            2. <b>The clenched teeth yawn:</b> By asking subjects to <span class="vocab" data-vn="nghiến răng">clench
+                their teeth</span>, they felt "stuck" mid-yawn. This shows that <span class="vocab"
+                data-vn="việc há hàm">gaping of the jaws</span> is a necessary <span class="vocab"
+                data-vn="thành phần/yếu tố">component</span>.<br>
+            3. <b>The nose yawn:</b> Unlike normal breathing, yawning is impossible via <span class="vocab"
+                data-vn="hít vào bằng mũi">nasal inhalation</span> alone.<br><br>
+
+            Yawning is a powerful movement that involves <span class="vocab" data-vn="giãn cơ">stretching</span> facial
+            muscles, tilting the head back, and even producing tears. It often shares <span class="vocab"
+                data-vn="đặc tính">properties</span> with stretching, forming a "global motor complex".<br><br>
+
+            A fascinating observation involves <span class="vocab" data-vn="đột quỵ">stroke</span> patients paralyzed on
+            one side. When they yawn, their paralyzed arm may rise and <span class="vocab" data-vn="co duỗi">flex</span>
+            automatically—an <span class="vocab" data-vn="phản ứng liên kết">associated response</span>. This suggests
+            yawning activates <span class="vocab" data-vn="vô thức">unconscious</span> connections between the brain and
+            the <span class="vocab" data-vn="hệ vận động">motor system</span>.<br><br>
+
+            Ultimately, yawning seems associated with a change of <span class="vocab"
+                data-vn="trạng thái hành vi">behavioral state</span>, switching from one activity to another. It is a
+            reminder of the ancient behavior that <span class="vocab" data-vn="ẩn nấp/ẩn giấu">lurks</span> beneath the
+            <span class="vocab" data-vn="vẻ bề ngoài">veneer</span> of culture and language.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(2)">🔊 Đọc Passage 2</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab3" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 3<br>Endangered Languages</h1>
+        <div class="passage" id="passage3">
+            ‘Nevermind whales, save the languages’, says Peter Monaghan. Worried about the loss of rain forests and the
+            ozone layer? Well, neither of those is doing any worse than the 6,000 to 7,000 languages that remain in use
+            on Earth. One half of the survivors will almost certainly be <span class="vocab"
+                data-vn="biến mất">gone</span> by 2050, while 40% more will probably be <span class="vocab"
+                data-vn="đang trên đường biến mất">well on their way out</span>. In their place, almost all humans will
+            speak one of a handful of <span class="vocab" data-vn="siêu ngôn ngữ">megalanguages</span> – Mandarin,
+            English, Spanish.<br><br>
+
+            Linguists know what causes languages to disappear, but less often <span class="vocab"
+                data-vn="được nhận xét/đề cập">remarked</span> is what happens on the way to disappearance: languages’
+            vocabularies, grammars and <span class="vocab" data-vn="tiềm năng biểu đạt">expressive potential</span> all
+            <span class="vocab" data-vn="suy giảm">diminish</span>. When a community <span class="vocab"
+                data-vn="chuyển sang">goes over</span> from a traditional language to a <span class="vocab"
+                data-vn="ngôn ngữ hỗn hợp">creole</span>, they leave behind a very fine vocabulary for the landscape. As
+            speakers become less able to express the <span class="vocab" data-vn="sự giàu có về kiến thức">wealth of
+                knowledge</span> that has filled <span class="vocab" data-vn="tổ tiên">ancestors’</span> lives,
+            communities tend to become <span class="vocab" data-vn="bị xuống tinh thần">demoralised</span>.<br><br>
+
+            If the losses are so huge, why are relatively few linguists <span class="vocab"
+                data-vn="chiến đấu chống lại">combating</span> the situation? Australian linguists have achieved a great
+            deal in terms of <span class="vocab" data-vn="bảo tồn">preserving</span> languages, resulting in good <span
+                class="vocab" data-vn="tài liệu hóa">documentation</span>. In England, Peter Austin has directed efforts
+            to <span class="vocab" data-vn="hạn chế">limit</span> language loss. However, at linguistics meetings in the
+            US, there is growing evidence that not all approaches will be particularly helpful. Some linguists boast of
+            more and more <span class="vocab" data-vn="tinh vi/phức tạp">sophisticated</span> means of <span
+                class="vocab" data-vn="ghi lại/thu thập">capturing</span> languages: digital recording and
+            storage.<br><br>
+
+            But these encourage the "quick dash" style of recording trip. That’s not quite what some <span class="vocab"
+                data-vn="chuyên gia">specialists</span> have been seeking for 30 years. Michael Krauss complains that
+            linguists are playing with <span class="vocab" data-vn="những thứ không thiết yếu">non-essentials</span>
+            while most of their <span class="vocab" data-vn="dữ liệu thô">raw data</span> is disappearing. Who is to
+            blame? Many blame those <span class="vocab" data-vn="ám ảnh">obsessed</span> with **Noam Chomsky’s**
+            approaches. <span class="vocab" data-vn="các nhà ngôn ngữ học lý thuyết">Theoretical linguists</span> have
+            had so much influence that the <span class="vocab" data-vn="giới chuyên môn">profession</span> has largely
+            ignored the continuing disappearance of languages.<br><br>
+
+            Chomsky’s <span class="vocab" data-vn="tác phẩm mang tính cột mốc">landmark work</span> of 1957 argues that
+            all languages <span class="vocab" data-vn="thể hiện/phô bày">exhibit</span> certain <span class="vocab"
+                data-vn="phổ quát">universal</span> grammatical features, <span class="vocab"
+                data-vn="được mã hóa">encoded</span> in the human mind. Creating dictionaries and grammars requires
+            <span class="vocab" data-vn="kéo dài">prolonged</span> and <span class="vocab"
+                data-vn="tận tụy">dedicated</span> work. Documentary linguists must observe not only <span class="vocab"
+                data-vn="sự tinh tế về cấu trúc">structural subtleties</span>, but also social and political factors.
+            Such work calls for <span class="vocab" data-vn="kiên trì/liên tục">persistent</span> funding for field
+            scientists who may <span class="vocab" data-vn="mạo hiểm đi vào">venture</span> into <span class="vocab"
+                data-vn="khắc nghiệt">harsh</span> and even <span class="vocab" data-vn="nguy hiểm">hazardous</span>
+            places.<br><br>
+
+            Once there, they may face difficulties such as community <span class="vocab"
+                data-vn="sự nghi ngờ">suspicion</span>. Parents may <span class="vocab" data-vn="từ bỏ">give up</span>
+            using the language with their children, believing they will benefit from speaking a more <span class="vocab"
+                data-vn="được hiểu rộng rãi">widely understood</span> one. The highest <span class="vocab"
+                data-vn="rào cản">barrier</span> to language preservation is the profession's emphasis on theory, which
+            <span class="vocab" data-vn="làm mòn/làm giảm">wears down</span> the enthusiasm of linguists. While Chomsky
+            has recently spoken in support of preservation, his argument remains <span class="vocab"
+                data-vn="không ủy mị/thực tế">unsentimental</span>: the loss of a language is a tragedy because it means
+            the permanent loss of the most <span class="vocab" data-vn="liên quan/thích hợp">relevant</span> data.
+            However, Nick Evans objects, arguing that the process of <span class="vocab"
+                data-vn="sự đắm mình/nhúng mình">immersion</span> in a language is the most <span class="vocab"
+                data-vn="đòi hỏi khắt khe">demanding</span> intellectual task.<br>
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(3)">🔊 Đọc Passage 3</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab4" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 4<br>The Ant and the Mandarin</h1>
+        <div class="passage" id="passage4">
+            In 1476, the farmers of Berne in Switzerland decided there was only one way to <span class="vocab"
+                data-vn="giải phóng / loại bỏ sạch sẽ">rid</span> their fields of the <span class="vocab"
+                data-vn="sâu xám / sâu cắn lá">cutworms</span> attacking their <span class="vocab"
+                data-vn="mùa màng / cây trồng">crops</span>. They took the <span class="vocab"
+                data-vn="loài gây hại (sâu bọ, chuột...)">pests</span> to court. The worms were tried, found <span
+                class="vocab" data-vn="có tội">guilty</span> and <span class="vocab"
+                data-vn="bị khai trừ khỏi giáo hội (ngữ cảnh này là bị tẩy chay)">excommunicated</span> by the
+            arch­bishop. In China, farmers had a more practical approach to <span class="vocab"
+                data-vn="kiểm soát dịch hại">pest control</span>. Rather than <span class="vocab"
+                data-vn="dựa dẫm vào">relying on</span> <span class="vocab" data-vn="sự can thiệp của thần thánh">divine
+                intervention</span>, they put their faith in frogs, ducks and ants.<br><br>
+
+            Frogs and ducks were encouraged to <span class="vocab" data-vn="táp lấy / đớp gọn">snap up</span> the pests
+            in the <span class="vocab" data-vn="ruộng lúa">paddies</span> and the occasional <span class="vocab"
+                data-vn="nạn dịch / sự bùng phát">plague</span> of <span class="vocab"
+                data-vn="con châu chấu">locusts</span>. But the <span class="vocab"
+                data-vn="khái niệm / quan niệm">notion</span> of <span class="vocab"
+                data-vn="kiểm soát sinh học (dùng thiên địch)">biological control</span> began with an ant. More
+            specifically, it started with the <span class="vocab" data-vn="ăn thịt / săn mồi">predatory</span> yellow
+            citrus ant, which has been <span class="vocab" data-vn="tiêu diệt gọn / dọn sạch">polishing off</span> pests
+            in the orange <span class="vocab" data-vn="vườn cây ăn quả / vườn cam">groves</span> of southern China for
+            ít nhất 1,700 years. The yellow citrus ant is a type of <span class="vocab"
+                data-vn="kiến vàng (kiến thợ dệt)">weaver ant</span>, which <span class="vocab"
+                data-vn="buộc / kết nối">binds</span> leaves and <span class="vocab"
+                data-vn="cành con / cành nhỏ">twigs</span> with silk to form a neat, tent-like nest. In the beginning,
+            farmers <span class="vocab" data-vn="tạm hài lòng / chấp nhận dùng tạm">made do with</span> the <span
+                class="vocab" data-vn="lẻ tẻ / rải rác">odd</span> ants’ nests here and there. But it wasn’t long before
+            growing <span class="vocab" data-vn="nhu cầu">demand</span> led to the development of a <span class="vocab"
+                data-vn="phát triển thịnh vượng">thriving</span> trade in nests and a new type of agriculture – ant
+            farming.<br><br>
+
+            For an insect that bites, the yellow citrus ant is <span class="vocab"
+                data-vn="đáng chú ý / cực kỳ">remarkably</span> popular. Even by ant <span class="vocab"
+                data-vn="tiêu chuẩn">standards</span>, it is a <span class="vocab"
+                data-vn="đáng sợ / hung dữ">fearsome</span> predator. It’s big, runs fast and has a powerful <span
+                class="vocab" data-vn="cú cắn / sự kẹp bằng hàm">nip</span> – painful to humans but <span class="vocab"
+                data-vn="gây chết người / chí mạng">lethal</span> to many of the insects that <span class="vocab"
+                data-vn="gây hại / làm khổ sở">plague</span> the orange groves. For ít nhất 17 centuries, Chinese orange
+            growers have <span class="vocab" data-vn="khai thác / tận dụng nguồn lực">harnessed</span> những six-legged
+            killing machines to keep their fruit groves healthy and <span class="vocab"
+                data-vn="năng suất cao">productive</span>.<br><br>
+
+            Citrus fruits <span class="vocab" data-vn="tiến hóa">evolved</span> in the Far East and the Chinese
+            discovered the <span class="vocab" data-vn="sự thú vị / niềm vui">delights</span> of their flesh early on.
+            As the <span class="vocab" data-vn="quê hương tổ tiên / nơi nguồn gốc">ancestral home</span> of oranges,
+            lemons and pomelos, China also has the greatest <span class="vocab" data-vn="sự đa dạng">diversity</span> of
+            citrus pests. And the trees that produce the sweetest fruits, the mandarins – or kan – attract a <span
+                class="vocab" data-vn="một nhóm lớn / một loạt">host of</span> plant-eating insects, from sap-sucking
+            <span class="vocab" data-vn="rệp sáp">mealy bugs</span> to leaf-devouring <span class="vocab"
+                data-vn="sâu bướm">caterpillars</span>. Với so many <span class="vocab" data-vn="kẻ thù">enemies</span>,
+            fruit growers clearly had to have some way of <span class="vocab" data-vn="bảo vệ">protecting</span> their
+            <span class="vocab" data-vn="vườn cây ăn quả">orchards</span>.<br><br>
+
+            The West did not discover the Chinese orange growers’ <span class="vocab" data-vn="vũ khí bí mật">secret
+                weapon</span> cho đến the early 20th century. At the time, Florida was suffering an <span class="vocab"
+                data-vn="nạn dịch / sự bùng phát mạnh">epidemic</span> of citrus <span class="vocab"
+                data-vn="bệnh loét cây">canker</span>. Walter Swingle, a plant <span class="vocab"
+                data-vn="nhà sinh lý học">physiologist</span> working for the US Department of Agriculture, was sent to
+            China in search of <span class="vocab" data-vn="các giống / chủng loại (cây trồng)">varieties</span> of
+            orange that were <span class="vocab" data-vn="có khả năng kháng (bệnh)">resistant to</span> the disease.
+            Swingle spent some time studying the citrus orchards around Guangzhou, and there he <span class="vocab"
+                data-vn="tình cờ thấy / bắt gặp">came across</span> the story of the <span class="vocab"
+                data-vn="kiến được nuôi dưỡng">cultivated</span> ant. These ants, he was told, were “grown” by the
+            people of a small village nearby who sold them to the orange growers by the <span class="vocab"
+                data-vn="theo từng tổ đầy">nestful</span>.<br><br>
+
+            The earliest report of citrus ants at work among the orange trees appeared in a book on <span class="vocab"
+                data-vn="thực vật học">botany</span> written by Hsi Han in AD 304. “The people of Chiao-Chih sell in
+            their markets ants in bags of <span class="vocab" data-vn="chiếu cói">rush matting</span>. In the south, if
+            the kan trees do not have this kind of ant, the fruits will all be damaged by many <span class="vocab"
+                data-vn="có hại">harmful</span> insects, and not a single fruit will be <span class="vocab"
+                data-vn="hoàn hảo / không tì vết">perfect</span>.” Initially, farmers <span class="vocab"
+                data-vn="dựa vào">relied on</span> nests collected from the wild or bought in the market where trade in
+            nests was <span class="vocab" data-vn="nhanh chóng / sôi nổi">brisk</span>.<br><br>
+
+            The business quickly became more <span class="vocab" data-vn="tinh vi / phức tạp">sophisticated</span>. From
+            the 10th century, country people began to <span class="vocab" data-vn="bẫy">trap</span> ants in <span
+                class="vocab" data-vn="nhân tạo">artificial</span> nests <span class="vocab"
+                data-vn="được đặt bẫy / nhử mồi">baited</span> with fat. “Fruit-growing families buy these ants from
+            <span class="vocab" data-vn="người bán hàng rong">vendors</span> who make a business of collecting and
+            selling such creatures,” wrote Chuang Chi-Yu in 1130. They wait until the ants have <span class="vocab"
+                data-vn="di cư / di chuyển sang">migrated</span> into the <span class="vocab"
+                data-vn="bọng đái / túi chứa">bladders</span> and take them away. By the 17th century, growers were
+            building bamboo <span class="vocab" data-vn="đường đi / cầu đi bộ">walkways</span> between their trees to
+            speed the <span class="vocab" data-vn="sự thiết lập quần thể / định cư">colonisation</span> of their
+            orchards.<br><br>
+
+            The orange growers clearly thought it worked. One <span class="vocab"
+                data-vn="chuyên gia / người có thẩm quyền">authority</span> stressed how <span class="vocab"
+                data-vn="thiết yếu / cực kỳ quan trọng">essential</span> it was to keep the fruit trees free of insect
+            pests. “But hand <span class="vocab" data-vn="lao động tay chân">labour</span> is not nearly as <span
+                class="vocab" data-vn="hiệu quả">efficient</span> as ant power…” Swingle was just as <span class="vocab"
+                data-vn="bị ấn tượng">impressed</span>. Yet despite his reports, many Western biologists were <span
+                class="vocab" data-vn="hoài nghi">sceptical</span>. In the West, the idea of using one insect to destroy
+            another was new and highly <span class="vocab" data-vn="gây tranh cãi">controversial</span>. The first <span
+                class="vocab" data-vn="bước đột phá">breakthrough</span> had come in 1888, when the <span class="vocab"
+                data-vn="non trẻ / mới hình thành">infant</span> orange industry in California had been saved từ <span
+                class="vocab" data-vn="sự tuyệt chủng / tuyệt diệt">extinction</span> by the Australian vedalia
+            beetle.<br><br>
+
+            The long tradition of ants in Chinese orchards only began to <span class="vocab"
+                data-vn="do dự / lung lay / suy yếu">waver</span> in the 1950s and 1960s with the <span class="vocab"
+                data-vn="sự đưa vào sử dụng / giới thiệu">introduction</span> of powerful organic <span class="vocab"
+                data-vn="thuốc trừ sâu">insecticides</span>. Although most fruit growers <span class="vocab"
+                data-vn="chuyển đổi">switched</span> to chemicals, those who abandoned ants in favour of chemicals
+            quickly became <span class="vocab" data-vn="vỡ mộng / chán nản">disillusioned</span>. As costs <span
+                class="vocab" data-vn="tăng vọt">soared</span> and pests began to develop <span class="vocab"
+                data-vn="sự kháng thuốc">resistance</span> to the chemicals, growers began to <span class="vocab"
+                data-vn="hồi sinh / làm sống lại">revive</span> the old ant <span class="vocab"
+                data-vn="đội tuần tra">patrols</span>. They had good reason to have faith in their insect <span
+                class="vocab" data-vn="lực lượng lao động">workforce</span>.<br><br>
+
+            Research showed that as long as there were enough ants, they did an excellent job of <span class="vocab"
+                data-vn="tiêu diệt / xử lý nhanh">dispatching</span> some pests. Trees with yellow ants produced almost
+            20 per cent more healthy leaves. More recent <span class="vocab"
+                data-vn="thử nghiệm / cuộc thử đồ">trials</span> have shown that những trees <span class="vocab"
+                data-vn="cho sản lượng / thu hoạch">yield</span> just as big a crop as những protected by expensive
+            chemical sprays.<br><br>
+
+            One apparent <span class="vocab" data-vn="trở ngại / điểm yếu">drawback</span> was that citrus ants protect
+            mealy bugs in exchange for the sweet <span class="vocab"
+                data-vn="dịch ngọt (do côn trùng tiết ra)">honey-dew</span> they <span class="vocab"
+                data-vn="tiết ra">secrete</span>. Where mealy bugs <span class="vocab"
+                data-vn="sinh sôi nảy nở">proliferate</span> under the ants’ protection, they are usually heavily <span
+                class="vocab" data-vn="bị ký sinh">parasitised</span> and this <span class="vocab"
+                data-vn="hạn chế">limits</span> the harm they can do. Orange growers who <span class="vocab"
+                data-vn="trông cậy / dựa vào">rely on</span> <span class="vocab"
+                data-vn="động vật ăn thịt">carnivorous</span> ants maintain a better <span class="vocab"
+                data-vn="sự cân bằng giữa các loài">balance of species</span> in their orchards. In the <span
+                class="vocab" data-vn="về lâu về dài">long run</span>, ants do a lot less damage than chemicals.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(4)">🔊 Đọc Passage 4</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(n) {
+            // Chỉ ẩn các phần tử có class 'tab-content'
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Hiện đúng tab bài đọc được chọn
+            const targetTab = document.getElementById('tab' + n);
+            if (targetTab) {
+                targetTab.style.display = 'block';
+            }
+
+            // Cập nhật trạng thái active cho nút bấm tab
+            // Lưu ý: Đảm bảo các nút bấm của thầy có class là 'tab'
+            document.querySelectorAll('.tab').forEach((tab, i) => {
+                // i + 1 tương ứng với số thứ tự tab
+                tab.classList.toggle('active', (i + 1) === n);
+            });
+
+            stopReading();
+        }
+
+        let utterance = null;
+
+        function readPassage(n) {
+            stopReading();
+            // Lấy nội dung từ passage tương ứng (passage1, passage2, passage3...)
+            const passageElement = document.getElementById('passage' + n);
+            if (!passageElement) return;
+
+            const text = passageElement.innerText;
+            utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.92;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopReading() {
+            window.speechSynthesis.cancel();
+        }
+
+        function toggleAnswers() {
+            const ans = document.getElementById('answers');
+            if (ans) {
+                ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>
