@@ -218,10 +218,12 @@
     </header>
 
     <div class="tabs">
-        <button class="tab active" onclick="switchTab(1)">Passage 1</button>
+        <button class="tab" onclick="switchTab(1)">Passage 1</button>
         <button class="tab" onclick="switchTab(2)">Passage 2</button>
         <button class="tab" onclick="switchTab(3)">Passage 3</button>
         <button class="tab" onclick="switchTab(4)">Passage 4</button>
+        <button class="tab" onclick="switchTab(5)">Passage 5</button>
+        <button class="tab active" onclick="switchTab(6)">Passage 6</button>
     </div>
 
     <!-- PASSAGE 1 -->
@@ -572,6 +574,170 @@
 
         <div style="text-align:center; margin:40px 0;">
             <button onclick="readPassage(4)">🔊 Đọc Passage 4</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab5" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 5<br>The Alaskan permafrost is thawing</h1>
+        <div class="passage" id="passage5">
+            The Alaskan <span class="vocab" data-vn="tầng đất đóng băng vĩnh cửu">permafrost</span> is <span
+                class="vocab" data-vn="đang tan chảy">thawing</span> fast, <span class="vocab"
+                data-vn="giải phóng ra">releasing</span> three trillion <span class="vocab"
+                data-vn="gallon (đơn vị đo thể tích ~3.78 lít)">gallons</span> of water per year than nó đã từng làm
+            <span class="vocab" data-vn="chỉ trong vòng 4 thập kỷ qua">just four decades ago</span>. A <span
+                class="vocab" data-vn="có quy mô/kích thước bằng bang Wisconsin">Wisconsin-sized</span> region of <span
+                class="vocab" data-vn="đất bị đóng băng">frozen soil</span> is <span class="vocab"
+                data-vn="đang dần biến mất">disappearing</span>, <span class="vocab"
+                data-vn="làm dấy lên những lo ngại về">raising concerns about</span> <span class="vocab"
+                data-vn="giải phóng / làm bùng phát">unleashing</span> new <span class="vocab"
+                data-vn="mầm bệnh">pathogens</span> <span class="vocab" data-vn="đối với nhân loại">on
+                humanity</span>.<br><br>
+
+            Thawing permafrost is <span class="vocab" data-vn="nằm trong số những...">among</span> climate science’s
+            <span class="vocab" data-vn="tồi tệ nhất">worst</span> <span class="vocab"
+                data-vn="vòng lặp phản hồi tích cực (càng nóng càng tan, càng tan càng nóng)">“positive feedback
+                loops”</span>: As the world warms, permafrost—<span class="vocab"
+                data-vn="về bản chất là">essentially</span> frozen soil—thaws, releasing <span class="vocab"
+                data-vn="nước ngọt">fresh water</span> and carbon <span class="vocab" data-vn="vào môi trường">into the
+                environment</span>. That <span class="vocab" data-vn="sự giải phóng / thải ra">release</span> <span
+                class="vocab" data-vn="hơn nữa / thêm vào đó">further</span> <span class="vocab"
+                data-vn="thúc đẩy / tiếp nhiên liệu cho">fuels</span> climate change, <span class="vocab"
+                data-vn="dẫn tới / thúc đẩy">driving</span> more warming.<br><br>
+
+            In a <span class="vocab" data-vn="nghiên cứu mới đây">new study</span>, researchers <span class="vocab"
+                data-vn="đã theo dõi / lần theo dấu vết">tracked</span> how thawing permafrost in the <span
+                class="vocab" data-vn="vùng dốc phía Bắc">North Slope region</span> has added fresh water và <span
+                class="vocab" data-vn="carbon hữu cơ hòa tan">dissolved organic carbon</span> vào các <span
+                class="vocab" data-vn="cửa sông">estuaries</span> <span class="vocab"
+                data-vn="ngoài khơi bờ biển Alaska">off the Alaskan coast</span>. In <span class="vocab"
+                data-vn="những năm gần đây">recent years</span>, the region released <span class="vocab"
+                data-vn="gần như / xấp xỉ">nearly</span> 12 <span class="vocab" data-vn="ki-lô-mét khối">cubic
+                kilometers</span> mỗi năm, <span class="vocab" data-vn="đủ để làm đầy">enough to fill</span> more than
+            4.5 million <span class="vocab" data-vn="hồ bơi tiêu chuẩn Olympic">Olympic swimming pools</span>.<br><br>
+
+            Fresh water là một <span class="vocab" data-vn="vấn đề đối với đại dương">problem for the ocean</span>—it
+            <span class="vocab" data-vn="làm gián đoạn / gây trở ngại">disrupts</span> <span class="vocab"
+                data-vn="sự hình thành băng biển">sea ice formation</span>, <span class="vocab"
+                data-vn="thay đổi / biến đổi">alters</span> the <span class="vocab" data-vn="độ mặn">salinity</span> của
+            các <span class="vocab" data-vn="đầm phá ven biển">coastal lagoons</span> và vịnh, và có thể <span
+                class="vocab" data-vn="đe dọa đến">threaten</span> <span class="vocab"
+                data-vn="sự lưu thông đại dương toàn cầu">global ocean circulation</span>. Từ đầu những năm 1980 đến
+            2023, <span class="vocab" data-vn="lượng carbon">the amount of carbon</span> mà các dòng sông ở phía bắc
+            Alaska thải ra đã <span class="vocab" data-vn="tăng vọt lên (quá khứ của rise)">risen</span> từ khoảng 120
+            <span class="vocab" data-vn="gigagram (đơn vị đo khối lượng)">gigagrams</span> lên tới khoảng 170
+            gigagrams.<br><br>
+
+            “Một phần lượng carbon đó đã <span class="vocab" data-vn="bị khóa chặt / tích tụ">been locked up</span>
+            trong <span class="vocab" data-vn="hàng chục nghìn năm">tens of thousands of years</span>. Giờ đây nó đã tan
+            ra, <span class="vocab" data-vn="được huy động / lưu thông">mobilized</span> trong các dòng sông, và đi ra
+            đại dương,” Michael Rawlins, <span class="vocab" data-vn="tác giả chính của nghiên cứu">lead author of the
+                study</span>, cho biết. <span class="vocab"
+                data-vn="sự thoát khí / giải phóng khí">“Outgassing”</span>—sự giải phóng <span class="vocab"
+                data-vn="khí mê-tan">methane</span> hoặc carbon dioxide—có thể <span class="vocab"
+                data-vn="xảy ra trực tiếp từ...">happen from rivers directly</span> trước khi nó <span class="vocab"
+                data-vn="đi tới đại dương">reaches the ocean</span>.<br><br>
+
+            Nghiên cứu có thể giúp các nhà khoa học <span class="vocab" data-vn="hiểu rõ hơn về">better
+                understand</span> <span class="vocab"
+                data-vn="lượng khí thải carbon do tan băng vĩnh cửu">permafrost-fueled carbon emissions</span> trên khắp
+            <span class="vocab" data-vn="vùng Bắc Cực">the Arctic</span>, một khu vực đang <span class="vocab"
+                data-vn="nóng lên nhanh gấp 3 lần">warming about three times faster than</span> phần còn lại của hành
+            tinh. “Khi chúng ta cố gắng hiểu rõ hơn về lượng carbon trong đại dương, chúng ta cần <span class="vocab"
+                data-vn="những ước tính chính xác">good estimates</span> về lượng carbon <span class="vocab"
+                data-vn="thải ra từ những dòng sông này">coming out of these rivers</span>,” Rawlins nói thêm.<br><br>
+
+            Các <span class="vocab" data-vn="kết quả nghiên cứu">findings</span>, được <span class="vocab"
+                data-vn="công bố trên tạp chí">published in the journal</span> <span class="vocab"
+                data-vn="Chu kỳ Sinh địa hóa Toàn cầu">Global Biogeochemical Cycles</span>, <span class="vocab"
+                data-vn="nhấn mạnh / làm nổi bật">highlight</span> cái <span class="vocab"
+                data-vn="thời điểm quan trọng / then chốt">critical moment</span> đối với khoa học. Chưa bao giờ có một
+            thời điểm quan trọng hơn để <span class="vocab" data-vn="đứng lên / bảo vệ">stand up</span> và cho thấy
+            <span class="vocab" data-vn="tại sao khoa học lại quan trọng">why science matters</span>.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(5)">🔊 Đọc Passage 5</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab6" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 6<br>What psychedelics actually do to the brain</h1>
+        <div class="passage" id="passage6">
+            <span class="vocab" data-vn="chất thức thần / thuốc gây ảo giác">Psychedelics</span> có thể khiến con người
+            trải nghiệm bản thân và thế giới <span class="vocab" data-vn="theo những cách ấn tượng / nổi bật">in
+                striking ways</span>—các hình khối <span class="vocab"
+                data-vn="biến đổi / thay đổi hình dạng">morph</span> và âm thanh <span class="vocab"
+                data-vn="bị biến dạng / bóp méo">distort</span>. Một số người thậm chí còn trải nghiệm <span
+                class="vocab" data-vn="cái chết của bản ngã (mất đi ý thức về cái tôi)">“ego death,”</span> một <span
+                class="vocab" data-vn="tình trạng thoáng qua / phù du">fleeting condition</span> nơi mà họ <span
+                class="vocab" data-vn="mất đi ý thức về bản thân">lose their sense of self</span>. Nhưng những gì xảy ra
+            bên trong não bộ để <span class="vocab" data-vn="gây ra những cảm giác như vậy">cause such sensations</span>
+            vẫn <span class="vocab" data-vn="chưa được hiểu rõ hoàn toàn">isn’t fully understood</span>.<br><br>
+
+            Một <span class="vocab" data-vn="phân tích mới nhất / toàn diện">new analysis</span> tiết lộ rằng chất thức
+            thần <span class="vocab" data-vn="tạo ra một mức độ cao...">generate a high degree of</span> <span
+                class="vocab" data-vn="sự trao đổi / kết nối (nghĩa bóng)">chatter</span> giữa <span class="vocab"
+                data-vn="các vùng não bộ">regions of the brain</span> <span class="vocab"
+                data-vn="có liên quan đến...">involved in</span> <span class="vocab"
+                data-vn="nhận thức giác quan">sensory perception</span> và những vùng dành cho tư duy. “Thông thường,
+            <span class="vocab" data-vn="sự nhận thức của não bộ về thế giới bên ngoài">the brain’s perception of the
+                external world</span> rất <span class="vocab" data-vn="riêng biệt / khác biệt hoàn toàn">distinct</span>
+            khỏi trí nhớ và <span class="vocab" data-vn="tư duy trừu tượng">abstract thinking</span> của chúng ta,” nhà
+            thần kinh học Manesh Girn cho biết.<br><br>
+
+            Việc hiểu về chất thức thần <span class="vocab" data-vn="đã trở nên ngày càng quan trọng">has become
+                increasingly important</span> khi mà <span class="vocab"
+                data-vn="sự quan tâm đến khả năng điều trị...">interest in their ability to treat</span> các <span
+                class="vocab" data-vn="tình trạng sức khỏe tâm thần">mental health conditions</span> như lo âu và trầm
+            cảm <span class="vocab" data-vn="đang bùng nổ mạnh mẽ">explodes</span>. Các nhà nghiên cứu hy vọng có thể
+            <span class="vocab" data-vn="tối ưu hóa tiềm năng chữa lành">optimize their healing potential</span>. Kể từ
+            khi <span class="vocab" data-vn="nghiên cứu ban đầu">initial research</span> bắt đầu hơn 50 năm trước, trước
+            <span class="vocab" data-vn="sự ra đời / xuất hiện của...">the advent of</span> công nghệ quét não hiệu quả
+            như <span class="vocab" data-vn="chụp cộng hưởng từ chức năng">fMRI</span>, các nhà khoa học đang <span
+                class="vocab" data-vn="nỗ lực để bắt kịp / bù đắp lỗ hổng kiến thức">working to catch up</span> ngay bây
+            giờ.<br><br>
+
+            <span class="vocab" data-vn="Các nghiên cứu trước đây">Prior studies</span> thường có quy mô nhỏ, <span
+                class="vocab" data-vn="dẫn đến những kết quả không đồng nhất">leading to inconsistent findings</span>.
+            Ví dụ, một số nghiên cứu <span class="vocab" data-vn="nhấn mạnh mạnh mẽ vào...">highly emphasized</span>
+            <span class="vocab" data-vn="sự gián đoạn / phá vỡ">disruptions</span> đối với <span class="vocab"
+                data-vn="mạng lưới chế độ mặc định của não">default mode network</span>—khu vực <span class="vocab"
+                data-vn="chịu trách nhiệm cho việc xác định...">responsible for defining</span> danh tính của chúng ta.
+            Nghiên cứu mới này đã áp dụng một <span class="vocab" data-vn="khung phân tích tiêu chuẩn hóa">standardized
+                framework</span> để phân tích dữ liệu từ hơn 500 bản quét, biến nó thành một <span class="vocab"
+                data-vn="kiệt tác / thành tựu rực rỡ">tour de force</span> trong lĩnh vực này.<br><br>
+
+            Bản phân tích xác nhận rằng những <span class="vocab" data-vn="hợp chất">compounds</span> này không chỉ tác
+            động đến một phần đơn lẻ mà còn <span class="vocab"
+                data-vn="thay đổi về mặt bản chất / căn bản">fundamentally change</span> cách não bộ <span class="vocab"
+                data-vn="đang xử lý thông tin">is processing information</span>. <span class="vocab"
+                data-vn="Sự tích hợp / hợp nhất được mở rộng">This expanded integration</span> có thể <span
+                class="vocab" data-vn="phá vỡ / làm tan rã">break down</span> <span class="vocab"
+                data-vn="các mô hình nhận thức cứng nhắc">rigid cognitive patterns</span> và <span class="vocab"
+                data-vn="tăng cường sự linh hoạt trong tư duy">increase flexibility of thought</span>, điều này có thể
+            giúp đỡ các bệnh nhân bị <span class="vocab" data-vn="rối loạn gây nghiện">addictive
+                disorders</span>.<br><br>
+
+            Quan trọng là, <span class="vocab" data-vn="hoạt động bất thường">unusual activity</span> cũng xuất hiện ở
+            các vùng não <span class="vocab" data-vn="liên quan đến vận động">involved in movement</span>. Điều này có
+            thể giải thích tại sao một số <span class="vocab" data-vn="triệu chứng thực thể">physical symptoms</span>
+            của <span class="vocab" data-vn="bệnh liệt rung (Parkinson)">Parkinson’s disease</span> được cải thiện trong
+            <span class="vocab" data-vn="môi trường lâm sàng">clinical settings</span>. Tuy nhiên, các nhà khoa học nói
+            rằng <span class="vocab" data-vn="cần nhiều nghiên cứu hơn nữa để...">much more research is needed to</span>
+            <span class="vocab" data-vn="mô tả/định danh đầy đủ các...">characterize the full range of</span> trải
+            nghiệm, từ ảo giác thị giác đến <span class="vocab" data-vn="xử lý cảm xúc">emotional
+                processing</span>.<br><br>
+
+            Mặc dù điều này <span class="vocab" data-vn="đưa ra bằng chứng mạnh mẽ">offers strong evidence</span>, chúng
+            ta vẫn đang ở <span class="vocab" data-vn="những giai đoạn sơ khai / đầu tiên">early stages</span>. Như Girn
+            đã nói, “Chúng ta <span class="vocab" data-vn="mới chỉ bắt đầu tìm hiểu bề nổi (chưa thấm vào đâu)">have
+                barely even scratched the surface</span>.”
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(6)">🔊 Đọc Passage 6</button>
             <button onclick="stopReading()">⏹ Dừng</button>
         </div>
     </div>
