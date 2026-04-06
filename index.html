@@ -6,20 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Langmaster • IELTS Reading | Learning to Walk & Yawning</title>
     <style>
-        /* Import font hiện đại, sạch sẽ */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        /* Import font Inter với các độ dày đa dạng hơn */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         :root {
             --bg: #ffffff;
-            /* Trắng tinh khôi */
-            --text: #1a1a1a;
-            /* Đen gần như tuyệt đối */
+            --text: #121212;
             --accent: #000000;
-            /* Đen thuần cho điểm nhấn */
-            --border: #e0e0e0;
-            /* Xám nhạt cho đường kẻ */
-            --hover: #f5f5f5;
-            /* Xám cực nhẹ khi hover */
+            --border: #f0f0f0;
+            --subtle: #f9f9f9;
+            --shadow: rgba(0, 0, 0, 0.03);
+            --glass: rgba(255, 255, 255, 0.8);
         }
 
         * {
@@ -32,144 +29,184 @@
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.7;
-            padding: 40px 20px;
+            line-height: 1.8;
+            padding: 60px 20px;
             -webkit-font-smoothing: antialiased;
+            /* Tạo hiệu ứng gradient nền cực nhẹ để trông sang hơn */
+            background-image: radial-gradient(#f1f1f1 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
         header {
             text-align: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 30px;
-            margin-bottom: 50px;
+            padding-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .logo {
             font-weight: 700;
-            font-size: 2rem;
+            font-size: 2.4rem;
             color: var(--accent);
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
+        /* Tabs phong cách Pill sang trọng */
         .tabs {
             display: flex;
+            /* Đổi từ inline-flex sang flex */
             justify-content: center;
-            gap: 0;
-            /* Gộp các tab lại thành một khối */
-            margin-bottom: 40px;
+            /* Căn giữa các thành phần bên trong */
+            background: var(--subtle);
+            padding: 6px;
+            border-radius: 50px;
+            margin: 0 auto 50px auto;
+            /* Thêm "0 auto" để tự căn giữa chính nó */
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+            width: fit-content;
+            /* Đảm bảo khung vẫn ôm vừa khít các nút */
         }
 
         .tab {
-            padding: 12px 25px;
-            background: white;
-            border: 1px solid var(--border);
+            padding: 10px 28px;
+            background: transparent;
+            border: none !important;
+            /* Xóa border mặc định */
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            color: #666;
-        }
-
-        .tab:first-child {
-            border-radius: 4px 0 0 4px;
-        }
-
-        .tab:last-child {
-            border-radius: 0 4px 4px 0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            color: #888;
+            border-radius: 50px;
         }
 
         .tab.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
+            background: var(--bg);
+            color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
         }
 
         .content {
-            max-width: 850px;
-            /* Thu hẹp lại để đọc dễ hơn */
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0;
-            /* Bỏ padding ngoài để minimalist hơn */
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
             font-weight: 700;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             color: var(--accent);
-            margin-bottom: 40px;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
+            margin-bottom: 45px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-align: center;
         }
 
         .passage {
-            font-size: 1.1rem;
-            text-align: left;
-            /* Căn lề trái hiện đại hơn căn đều */
-            color: #333;
+            font-size: 1.15rem;
+            color: #2d2d2d;
+            background: var(--bg);
+            padding: 20px 0;
         }
 
+        /* Hiệu ứng Vocab "Lấp lánh" nhẹ nhàng */
+        /* Tìm và thay thế đoạn .vocab cũ bằng đoạn này */
         .vocab {
             font-weight: 600;
-            color: #0056b3;
-            /* Màu xanh đậm hiện đại, đủ nổi bật nhưng vẫn chuyên nghiệp */
-            border-bottom: 2px solid rgba(0, 86, 179, 0.2);
-            /* Gạch chân mờ để không bị rối mắt */
+            /* Màu chữ hồng pastel đậm hơn một chút để dễ đọc */
+            color: #db7093;
+            /* Đường line dưới chân là hồng nhạt cực kỳ tinh tế */
+            background: linear-gradient(to bottom, transparent 75%, #ffd1dc 75%);
             cursor: help;
             position: relative;
-            transition: all 0.2s ease;
-            padding: 0 2px;
+            transition: all 0.3s ease;
+            padding: 0 4px;
+            text-decoration: none;
         }
 
         .vocab:hover {
-            color: #ffffff;
-            background: #0056b3;
-            /* Khi hover sẽ highlight toàn bộ từ */
-            border-bottom-color: transparent;
-            border-radius: 2px;
+            /* Khi hover sẽ đổi sang nền hồng pastel và chữ trắng cho nổi bật */
+            background: #ffd1dc;
+            color: #db7093;
+            border-radius: 4px;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 209, 220, 0.4);
         }
 
         .vocab:hover::after {
             content: attr(data-vn);
             position: absolute;
-            bottom: 140%;
+            bottom: 150%;
             left: 50%;
             transform: translateX(-50%);
-            background: #1a1a1a;
-            /* Tooltip đen tuyền */
-            color: #ffffff;
-            padding: 8px 14px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 400;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            /* Hiệu ứng kính mờ */
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--accent);
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
             white-space: nowrap;
-            z-index: 20;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
+        /* Button phong cách Apple Minimalist */
         button {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--text);
-            padding: 12px 24px;
+            background: var(--subtle);
+            color: var(--accent);
+            border: 1px solid var(--border);
+            padding: 14px 30px;
             font-family: inherit;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             margin: 10px;
-            border-radius: 4px;
-            transition: all 0.3s;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 5px var(--shadow);
         }
 
         button:hover {
             background: var(--accent);
             color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
+        /* Khu vực đáp án sang trọng hơn */
         .answers {
-            margin-top: 50px;
-            padding: 30px;
-            background: var(--hover);
-            border-left: 4px solid var(--accent);
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--subtle);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+        }
+
+        .answers h3 {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #999;
         }
     </style>
 </head>
