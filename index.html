@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Langmaster • IELTS Reading | Learning to Walk & Yawning</title>
+    <title>IELTS Reading Thầy Du Gia Văn</title>
     <style>
         /* Import font Inter với các độ dày đa dạng hơn */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -69,24 +69,45 @@
             /* Đảm bảo khung vẫn ôm vừa khít các nút */
         }
 
-        .tab {
-            padding: 10px 28px;
-            background: transparent;
-            border: none !important;
-            /* Xóa border mặc định */
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            color: #888;
-            border-radius: 50px;
+        .tabs {
+            display: flex;
+            justify-content: flex-start;
+            overflow-x: auto;
+            white-space: nowrap;
+            /* Giảm padding của khung bao quanh */
+            padding: 5px;
+            gap: 5px;
+            max-width: 95%;
+            /* Mở rộng chiều ngang một chút cho thoáng */
+            margin: 0 auto 30px auto;
+            /* Giảm margin bottom */
+
+            /* Làm nền khung trong suốt hơn hoặc tiệp màu hơn */
+            background: rgba(249, 249, 249, 0.5);
+            border-radius: 100px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Ẩn thanh cuộn trên Chrome/Safari để trông chuyên nghiệp hơn */
+        .tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .tabs::-webkit-scrollbar-thumb {
+            background: #ffd1dc;
+            /* Màu hồng pastel đồng bộ của thầy */
+            border-radius: 10px;
         }
 
         .tab.active {
-            background: var(--bg);
-            color: var(--accent);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transform: translateY(-1px);
+            background: #ffd1dc !important;
+            /* Màu hồng pastel thương hiệu */
+            color: #db7093 !important;
+            /* Chữ hồng đậm */
+            border-color: #ffd1dc;
+            box-shadow: 0 4px 10px rgba(255, 209, 220, 0.5);
+            font-weight: 700;
         }
 
         .content {
@@ -110,7 +131,8 @@
         h1 {
             font-weight: 700;
             font-size: 2.8rem;
-            color: var(--accent);
+            color: #db7093;
+            /* Thầy thay màu ở đây, ví dụ màu hồng đậm cho đồng bộ Vocab */
             margin-bottom: 45px;
             letter-spacing: -1px;
             line-height: 1.1;
@@ -124,23 +146,30 @@
             padding: 20px 0;
         }
 
-        /* Hiệu ứng Vocab "Lấp lánh" nhẹ nhàng */
-        /* Tìm và thay thế đoạn .vocab cũ bằng đoạn này */
         .vocab {
             font-weight: 600;
-            /* Màu chữ hồng pastel đậm hơn một chút để dễ đọc */
             color: #db7093;
-            /* Đường line dưới chân là hồng nhạt cực kỳ tinh tế */
-            background: linear-gradient(to bottom, transparent 75%, #ffd1dc 75%);
+            /* Hiệu ứng gạch chân highlight tinh tế */
+            background: linear-gradient(to bottom, transparent 70%, #ffd1dc 70%);
             cursor: help;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            /* Nhanh hơn một chút cho cảm giác mượt trên mobile */
             padding: 0 4px;
             text-decoration: none;
+            display: inline-block;
+            /* Giúp transform hoạt động ổn định hơn */
+
+            /* TỐI ƯU CHO ANDROID */
+            -webkit-tap-highlight-color: transparent;
+            /* Xóa khung xanh khi chạm */
+            user-select: none;
+            /* Tránh việc học sinh vô tình bôi đen văn bản khi đang tra từ */
         }
 
-        .vocab:hover {
-            /* Khi hover sẽ đổi sang nền hồng pastel và chữ trắng cho nổi bật */
+        /* Kết hợp cả Hover (PC) và Active (Mobile) */
+        .vocab:hover,
+        .vocab:active {
             background: #ffd1dc;
             color: #db7093;
             border-radius: 4px;
@@ -148,24 +177,32 @@
             box-shadow: 0 5px 15px rgba(255, 209, 220, 0.4);
         }
 
-        .vocab:hover::after {
+        /* Tối ưu Tooltip hiện ra khi chạm trên Android */
+        .vocab:hover::after,
+        .vocab:active::after {
             content: attr(data-vn);
             position: absolute;
             bottom: 150%;
+            /* Đẩy cao hơn để né ngón tay */
             left: 50%;
             transform: translateX(-50%);
             background: var(--glass);
             backdrop-filter: blur(10px);
-            /* Hiệu ứng kính mờ */
             -webkit-backdrop-filter: blur(10px);
             color: var(--accent);
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            white-space: nowrap;
-            z-index: 100;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+
+            /* Tối ưu chiều rộng cho màn hình điện thoại */
+            width: max-content;
+            max-width: 250px;
+            white-space: normal;
+            text-align: center;
+            pointer-events: none;
         }
 
         /* Button phong cách Apple Minimalist */
@@ -173,13 +210,18 @@
             background: var(--subtle);
             color: var(--accent);
             border: 1px solid var(--border);
-            padding: 14px 30px;
+            /* Sửa lại padding: trên-dưới 8px, trái-phải 20px */
+            padding: 8px 20px;
             font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            /* Giảm nhẹ font size */
+            font-weight: 500;
+            /* Để font trung bình cho thanh thoát */
             cursor: pointer;
-            margin: 10px;
-            border-radius: 12px;
+            margin: 4px;
+            /* Giảm khoảng cách giữa các nút */
+            border-radius: 50px;
+            /* Bo tròn hoàn toàn dạng viên thuốc */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 2px 5px var(--shadow);
         }
@@ -217,13 +259,7 @@
         <p style="margin-top:10px; color:#666;">Coded & Designed by DuGiaVăn</p>
     </header>
 
-    <div class="tabs">
-        <button class="tab" onclick="switchTab(1)">Passage 1</button>
-        <button class="tab" onclick="switchTab(2)">Passage 2</button>
-        <button class="tab" onclick="switchTab(3)">Passage 3</button>
-        <button class="tab" onclick="switchTab(4)">Passage 4</button>
-        <button class="tab" onclick="switchTab(5)">Passage 5</button>
-        <button class="tab active" onclick="switchTab(6)">Passage 6</button>
+    <div class="tabs" id="tab-container">
     </div>
 
     <!-- PASSAGE 1 -->
@@ -232,7 +268,7 @@
         <div class="passage" id="passage1">
             These days the feet of a typical <span class="vocab" data-vn="cư dân đô thị / người sống ở thành phố">city
                 dweller</span> rarely
-            <span class="vocab" data-vn="chạm trán / đối mặt với (địa hình)">encounter</span> terrain bất kỳ more <span
+            <span class="vocab" data-vn="chạm trán / đối mặt với (địa hình)">encounter</span> terrain more <span
                 class="vocab" data-vn="gồ ghề / không bằng phẳng">uneven</span> than a crack in the pavement.
             While that may not seem like a problem, it turns out that by <span class="vocab"
                 data-vn="làm cho bằng phẳng / san phẳng">flattening</span> our urban environment we have put ourselves
@@ -665,79 +701,216 @@
     <div id="tab6" class="content tab-content" style="display:none;">
         <h1>READING PASSAGE 6<br>What psychedelics actually do to the brain</h1>
         <div class="passage" id="passage6">
-            <span class="vocab" data-vn="chất thức thần / thuốc gây ảo giác">Psychedelics</span> có thể khiến con người
-            trải nghiệm bản thân và thế giới <span class="vocab" data-vn="theo những cách ấn tượng / nổi bật">in
-                striking ways</span>—các hình khối <span class="vocab"
-                data-vn="biến đổi / thay đổi hình dạng">morph</span> và âm thanh <span class="vocab"
-                data-vn="bị biến dạng / bóp méo">distort</span>. Một số người thậm chí còn trải nghiệm <span
-                class="vocab" data-vn="cái chết của bản ngã (mất đi ý thức về cái tôi)">“ego death,”</span> một <span
-                class="vocab" data-vn="tình trạng thoáng qua / phù du">fleeting condition</span> nơi mà họ <span
-                class="vocab" data-vn="mất đi ý thức về bản thân">lose their sense of self</span>. Nhưng những gì xảy ra
-            bên trong não bộ để <span class="vocab" data-vn="gây ra những cảm giác như vậy">cause such sensations</span>
-            vẫn <span class="vocab" data-vn="chưa được hiểu rõ hoàn toàn">isn’t fully understood</span>.<br><br>
+            <span class="vocab" data-vn="chất thức thần / thuốc gây ảo giác">Psychedelics</span> can make people
+            experience themselves and the world <span class="vocab" data-vn="theo những cách ấn tượng / nổi bật">in
+                striking ways</span>—forms <span class="vocab" data-vn="biến đổi / thay đổi hình dạng">morph</span> and
+            sounds <span class="vocab" data-vn="bị biến dạng / bóp méo">distort</span>. Some even experience <span
+                class="vocab" data-vn="cái chết của bản ngã">“ego death,”</span> a <span class="vocab"
+                data-vn="thoáng qua / phù du">fleeting condition</span> where they lose their <span class="vocab"
+                data-vn="ý thức về bản thân">sense of self</span>. But what happens inside the brain to <span
+                class="vocab" data-vn="gây ra những cảm giác như vậy">cause such sensations</span> <span class="vocab"
+                data-vn="vẫn chưa được hiểu rõ hoàn toàn">isn’t fully understood</span>.<br><br>
 
-            Một <span class="vocab" data-vn="phân tích mới nhất / toàn diện">new analysis</span> tiết lộ rằng chất thức
-            thần <span class="vocab" data-vn="tạo ra một mức độ cao...">generate a high degree of</span> <span
-                class="vocab" data-vn="sự trao đổi / kết nối (nghĩa bóng)">chatter</span> giữa <span class="vocab"
-                data-vn="các vùng não bộ">regions of the brain</span> <span class="vocab"
-                data-vn="có liên quan đến...">involved in</span> <span class="vocab"
-                data-vn="nhận thức giác quan">sensory perception</span> và những vùng dành cho tư duy. “Thông thường,
-            <span class="vocab" data-vn="sự nhận thức của não bộ về thế giới bên ngoài">the brain’s perception of the
-                external world</span> rất <span class="vocab" data-vn="riêng biệt / khác biệt hoàn toàn">distinct</span>
-            khỏi trí nhớ và <span class="vocab" data-vn="tư duy trừu tượng">abstract thinking</span> của chúng ta,” nhà
-            thần kinh học Manesh Girn cho biết.<br><br>
+            A <span class="vocab" data-vn="phân tích toàn diện">new comprehensive analysis</span> reveals that
+            psychedelics <span class="vocab" data-vn="tạo ra một mức độ kết nối cao">generate a high degree of
+                chatter</span> between <span class="vocab" data-vn="các vùng não bộ">regions of the brain</span> <span
+                class="vocab" data-vn="có liên quan đến...">involved in</span> <span class="vocab"
+                data-vn="nhận thức giác quan">sensory perception</span> and those for thinking. “Usually, <span
+                class="vocab" data-vn="sự nhận thức của não bộ về thế giới bên ngoài">the brain’s perception of the
+                external world</span> is very <span class="vocab"
+                data-vn="riêng biệt / khác biệt hoàn toàn">distinct</span> from our memory and <span class="vocab"
+                data-vn="tư duy trừu tượng">abstract thinking</span>,” says neuroscientist Manesh Girn.<br><br>
 
-            Việc hiểu về chất thức thần <span class="vocab" data-vn="đã trở nên ngày càng quan trọng">has become
-                increasingly important</span> khi mà <span class="vocab"
-                data-vn="sự quan tâm đến khả năng điều trị...">interest in their ability to treat</span> các <span
-                class="vocab" data-vn="tình trạng sức khỏe tâm thần">mental health conditions</span> như lo âu và trầm
-            cảm <span class="vocab" data-vn="đang bùng nổ mạnh mẽ">explodes</span>. Các nhà nghiên cứu hy vọng có thể
-            <span class="vocab" data-vn="tối ưu hóa tiềm năng chữa lành">optimize their healing potential</span>. Kể từ
-            khi <span class="vocab" data-vn="nghiên cứu ban đầu">initial research</span> bắt đầu hơn 50 năm trước, trước
-            <span class="vocab" data-vn="sự ra đời / xuất hiện của...">the advent of</span> công nghệ quét não hiệu quả
-            như <span class="vocab" data-vn="chụp cộng hưởng từ chức năng">fMRI</span>, các nhà khoa học đang <span
-                class="vocab" data-vn="nỗ lực để bắt kịp / bù đắp lỗ hổng kiến thức">working to catch up</span> ngay bây
-            giờ.<br><br>
+            Understanding psychedelics <span class="vocab" data-vn="đã trở nên ngày càng quan trọng">has become
+                increasingly important</span> as <span class="vocab"
+                data-vn="sự quan tâm đến khả năng điều trị...">interest in their ability to treat</span> <span
+                class="vocab" data-vn="tình trạng sức khỏe tâm thần">mental health conditions</span> like anxiety and
+            depression <span class="vocab" data-vn="bùng nổ mạnh mẽ">explodes</span>. Researchers hope to <span
+                class="vocab" data-vn="tối ưu hóa tiềm năng chữa lành">optimize their healing potential</span>. Since
+            <span class="vocab" data-vn="nghiên cứu ban đầu">initial research</span> began more than fifty years ago,
+            before <span class="vocab" data-vn="sự ra đời / xuất hiện của...">the advent of</span> effective brain
+            scanning technology like <span class="vocab" data-vn="chụp cộng hưởng từ chức năng">fMRI</span>, scientists
+            are <span class="vocab" data-vn="nỗ lực để bắt kịp">working to catch up</span> now.<br><br>
 
-            <span class="vocab" data-vn="Các nghiên cứu trước đây">Prior studies</span> thường có quy mô nhỏ, <span
+            <span class="vocab" data-vn="Các nghiên cứu trước đây">Prior imaging studies</span> have been small, <span
                 class="vocab" data-vn="dẫn đến những kết quả không đồng nhất">leading to inconsistent findings</span>.
-            Ví dụ, một số nghiên cứu <span class="vocab" data-vn="nhấn mạnh mạnh mẽ vào...">highly emphasized</span>
-            <span class="vocab" data-vn="sự gián đoạn / phá vỡ">disruptions</span> đối với <span class="vocab"
-                data-vn="mạng lưới chế độ mặc định của não">default mode network</span>—khu vực <span class="vocab"
-                data-vn="chịu trách nhiệm cho việc xác định...">responsible for defining</span> danh tính của chúng ta.
-            Nghiên cứu mới này đã áp dụng một <span class="vocab" data-vn="khung phân tích tiêu chuẩn hóa">standardized
-                framework</span> để phân tích dữ liệu từ hơn 500 bản quét, biến nó thành một <span class="vocab"
-                data-vn="kiệt tác / thành tựu rực rỡ">tour de force</span> trong lĩnh vực này.<br><br>
+            For example, some <span class="vocab" data-vn="nhấn mạnh mạnh mẽ vào...">highly emphasized</span> <span
+                class="vocab" data-vn="sự gián đoạn / phá vỡ">disruptions</span> to the brain’s <span class="vocab"
+                data-vn="mạng lưới chế độ mặc định">default mode network</span>—the area <span class="vocab"
+                data-vn="chịu trách nhiệm xác định...">responsible for defining</span> our identity. This new research
+            applied a <span class="vocab" data-vn="khung phân tích tiêu chuẩn hóa">standardized framework</span> to
+            analyze data from more than 500 scans, making it a <span class="vocab"
+                data-vn="kiệt tác / thành tựu lớn">tour de force</span> in the field.<br><br>
 
-            Bản phân tích xác nhận rằng những <span class="vocab" data-vn="hợp chất">compounds</span> này không chỉ tác
-            động đến một phần đơn lẻ mà còn <span class="vocab"
-                data-vn="thay đổi về mặt bản chất / căn bản">fundamentally change</span> cách não bộ <span class="vocab"
-                data-vn="đang xử lý thông tin">is processing information</span>. <span class="vocab"
-                data-vn="Sự tích hợp / hợp nhất được mở rộng">This expanded integration</span> có thể <span
-                class="vocab" data-vn="phá vỡ / làm tan rã">break down</span> <span class="vocab"
-                data-vn="các mô hình nhận thức cứng nhắc">rigid cognitive patterns</span> và <span class="vocab"
-                data-vn="tăng cường sự linh hoạt trong tư duy">increase flexibility of thought</span>, điều này có thể
-            giúp đỡ các bệnh nhân bị <span class="vocab" data-vn="rối loạn gây nghiện">addictive
+            The analysis confirmed that these <span class="vocab" data-vn="hợp chất">compounds</span> don’t impact a
+            single part of the brain but <span class="vocab" data-vn="thay đổi về mặt bản chất">fundamentally
+                change</span> how the brain <span class="vocab" data-vn="đang xử lý thông tin">is processing
+                information</span>. This <span class="vocab" data-vn="sự tích hợp được mở rộng">expanded
+                integration</span> may <span class="vocab" data-vn="phá vỡ / làm tan rã">break down</span> <span
+                class="vocab" data-vn="các mô hình nhận thức cứng nhắc">rigid cognitive patterns</span> and <span
+                class="vocab" data-vn="tăng cường sự linh hoạt trong tư duy">increase flexibility of thought</span>,
+            which could help patients with <span class="vocab" data-vn="rối loạn gây nghiện">addictive
                 disorders</span>.<br><br>
 
-            Quan trọng là, <span class="vocab" data-vn="hoạt động bất thường">unusual activity</span> cũng xuất hiện ở
-            các vùng não <span class="vocab" data-vn="liên quan đến vận động">involved in movement</span>. Điều này có
-            thể giải thích tại sao một số <span class="vocab" data-vn="triệu chứng thực thể">physical symptoms</span>
-            của <span class="vocab" data-vn="bệnh liệt rung (Parkinson)">Parkinson’s disease</span> được cải thiện trong
-            <span class="vocab" data-vn="môi trường lâm sàng">clinical settings</span>. Tuy nhiên, các nhà khoa học nói
-            rằng <span class="vocab" data-vn="cần nhiều nghiên cứu hơn nữa để...">much more research is needed to</span>
-            <span class="vocab" data-vn="mô tả/định danh đầy đủ các...">characterize the full range of</span> trải
-            nghiệm, từ ảo giác thị giác đến <span class="vocab" data-vn="xử lý cảm xúc">emotional
-                processing</span>.<br><br>
+            Importantly, <span class="vocab" data-vn="hoạt động bất thường">unusual activity</span> cũng xuất hiện ở các
+            vùng não <span class="vocab" data-vn="liên quan đến vận động">involved in movement</span>. This may explain
+            why một số <span class="vocab" data-vn="triệu chứng thực thể">physical symptoms</span> of <span
+                class="vocab" data-vn="bệnh liệt rung (Parkinson)">Parkinson’s disease</span> improved in <span
+                class="vocab" data-vn="môi trường lâm sàng">clinical settings</span>. Tuy nhiên, scientists say <span
+                class="vocab" data-vn="cần nhiều nghiên cứu hơn nữa để...">much more research is needed to</span> <span
+                class="vocab" data-vn="mô tả/định danh đầy đủ các...">characterize the full range of</span> experiences,
+            from <span class="vocab" data-vn="ảo giác thị giác">visual experiences</span> to <span class="vocab"
+                data-vn="xử lý cảm xúc">emotional processing</span>.<br><br>
 
-            Mặc dù điều này <span class="vocab" data-vn="đưa ra bằng chứng mạnh mẽ">offers strong evidence</span>, chúng
-            ta vẫn đang ở <span class="vocab" data-vn="những giai đoạn sơ khai / đầu tiên">early stages</span>. Như Girn
-            đã nói, “Chúng ta <span class="vocab" data-vn="mới chỉ bắt đầu tìm hiểu bề nổi (chưa thấm vào đâu)">have
-                barely even scratched the surface</span>.”
+            While this <span class="vocab" data-vn="đưa ra bằng chứng mạnh mẽ">offers strong evidence</span>, we are
+            still in the <span class="vocab" data-vn="những giai đoạn sơ khai">early stages</span>. As Girn says, “We
+            <span class="vocab" data-vn="mới chỉ bắt đầu tìm hiểu bề nổi (chưa thấm vào đâu)">have barely even scratched
+                the surface</span>.”
         </div>
 
         <div style="text-align:center; margin:40px 0;">
             <button onclick="readPassage(6)">🔊 Đọc Passage 6</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab7" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 7<br>April Showers to Storms</h1>
+        <div class="passage" id="passage7">
+            After months of cold, April brings brightness to the Northern Hemisphere. Rain helps seeds <span
+                class="vocab" data-vn="nảy mầm">germinate</span>, brings flower blooms, and <span class="vocab"
+                data-vn="làm đầy lại / nạp lại">refills</span> drinking water supplies. But too much can <span
+                class="vocab" data-vn="gây trở ngại / cản trở">hinder</span> spring planting, lead to major flooding,
+            and damage <span class="vocab" data-vn="cơ sở hạ tầng">infrastructure</span>.<br><br>
+
+            Researchers say April showers are <span class="vocab" data-vn="chuyển hóa / biến đổi">transforming</span>
+            from <span class="vocab" data-vn="mưa phùn / mưa nhỏ">sprinkles</span> into heavier storms as Earth’s
+            temperature rises. Since the 1950s, heavier rain events have become more <span class="vocab"
+                data-vn="thường xuyên">frequent</span> and <span class="vocab"
+                data-vn="dữ dội / cường độ cao">intense</span> across most of the United States. As a result,
+            communities are dealing with <span class="vocab" data-vn="chưa từng có tiền lệ">unprecedented</span> heavy
+            rain events. Last April, for example, flash flooding and tornadoes <span class="vocab"
+                data-vn="tấn công dồn dập / nghiền nát">pounded</span> several states, dropping a record three months’
+            worth of <span class="vocab" data-vn="lượng mưa">precipitation</span> in days. The historic round of severe
+            weather <span class="vocab" data-vn="cướp đi sinh mạng">claimed</span> 24 lives; 15 were <span class="vocab"
+                data-vn="có liên quan / kết nối tới">linked to</span> flooding.<br><br>
+
+            The link between warmer temperatures and rainfall is relatively <span class="vocab"
+                data-vn="thẳng thắn / dễ hiểu">straightforward</span>, as a warmer atmosphere can “hold” more water. For
+            every degree Fahrenheit that air temperature rises, the atmosphere can hold 4% more water. While no weather
+            is <span class="vocab" data-vn="gây ra bởi">caused by</span> climate change, warmer conditions are creating
+            a more <span class="vocab" data-vn="đầy nước / tích tụ nước">water-loaded</span> environment for storms to
+            <span class="vocab" data-vn="phát triển mạnh mẽ">thrive</span>. Climate change is also <span class="vocab"
+                data-vn="gây ảnh hưởng / tác động">affecting</span> the flow of energy. As water <span class="vocab"
+                data-vn="bay hơi">evaporates</span>, it pulls heat from the surface. When the vapor <span class="vocab"
+                data-vn="ngưng tụ">condenses</span> into clouds, it releases that energy.<br><br>
+
+            “You can think of it as a bigger bucket,” says Jonathan Winter, a climate scientist. When an intense
+            thunderstorm comes through to <span class="vocab" data-vn="vắt kiệt / ép ra">squeeze out</span> the
+            atmosphere, you have that bigger bucket to empty. Warmer ocean temperatures also increase <span
+                class="vocab" data-vn="sự bay hơi">evaporation</span>, <span class="vocab"
+                data-vn="chuyển dời / truyền đi">transferring</span> nhiều <span class="vocab"
+                data-vn="độ ẩm">moisture</span> to the air. In some parts of the U.S., the Northeast has experienced
+            about 60% more rain than six decades ago. This <span class="vocab"
+                data-vn="sự va chạm / xung đột">collision</span> of warm, moist air and cool air causes extreme
+            atmospheric <span class="vocab" data-vn="sự bất ổn định">instability</span>.<br><br>
+
+            It is possible to <span class="vocab" data-vn="dự đoán / lường trước">anticipate</span> the areas that will
+            be more <span class="vocab" data-vn="dễ bị tổn thương">vulnerable</span> to flooding. The most <span
+                class="vocab" data-vn="nhạy cảm / dễ bị ảnh hưởng">susceptible</span> places are those that are <span
+                class="vocab" data-vn="vùng trũng">low-lying</span> or close to a <span class="vocab"
+                data-vn="vùng ngập lụt">floodplain</span>. To <span class="vocab" data-vn="thích nghi">adapt</span> to
+            những thay đổi này, <span class="vocab" data-vn="nhà quy hoạch đô thị">town planners</span> are resizing
+            <span class="vocab" data-vn="cống thoát nước">culverts</span> that channel water and building more <span
+                class="vocab" data-vn="kiên cường / bền bỉ">resilient</span> bridges. They are even <span class="vocab"
+                data-vn="chủ động / phủ đầu">preemptively</span> moving people away từ các khu vực <span class="vocab"
+                data-vn="dễ bị lũ lụt">flood-prone</span>.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(7)">🔊 Đọc Passage 7</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab8" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 8<br>The Shifting Tornado Alley</h1>
+        <div class="passage" id="passage8">
+            Tornadoes are some of the most <span class="vocab" data-vn="có tính tàn phá / hủy diệt">destructive</span>
+            natural disasters seen in the U.S. each year, and <span class="vocab"
+                data-vn="trận lốc xoáy / vòi rồng">twisters</span> are 10 times more common in Tornado Alley. But for
+            tornado expert Stephen Strader, the term may be a bit <span class="vocab"
+                data-vn="lỗi thời / cũ kỹ">outdated</span>. “We've had <span class="vocab"
+                data-vn="thảm khốc / tàn phá nặng nề">devastating</span> tornadoes outside of what people consider
+            Tornado Alley,” he explains. And the <span class="vocab" data-vn="hiện tượng thảm khốc">disastrous
+                phenomenon</span> is only expected to get worse.<br><br>
+
+            Drier conditions in the Great Plains, <span class="vocab" data-vn="đi kèm với / kết hợp với">coupled
+                with</span> increased <span class="vocab" data-vn="độ ẩm">moisture</span> in the Southeast, is <span
+                class="vocab" data-vn="dịch chuyển / thay đổi vị trí">shifting</span> tornado activity away from states
+            like Texas and Oklahoma. Scientists <span class="vocab" data-vn="quy cho / cho là do">attribute</span> this
+            shift to climate change. “It’s a very <span class="vocab" data-vn="tinh tế / khó nhận ra">subtle</span>
+            shift,” Strader says. Still, the shift is “<span class="vocab"
+                data-vn="đáng chú ý / rỏ rệt">notable</span>,” says Jana Houser. “We are seeing places that are not
+            expecting tornadoes become <span class="vocab" data-vn="nạn nhân">victims</span> to tornadoes.” In 2024, six
+            different <span class="vocab" data-vn="đợt bùng phát (vòi rồng)">tornado outbreaks</span> caused billions of
+            dollars in damage each.<br><br>
+
+            <h3>How do tornadoes form?</h3>
+
+            Strader compares it to baking a cake. You need specific <span class="vocab"
+                data-vn="nguyên liệu">ingredients</span>: heat, moisture, drier air, and <span class="vocab"
+                data-vn="độ đứt gió (thay đổi tốc độ/hướng gió)">wind shear</span> (changes in wind speed and direction
+            that create <span class="vocab" data-vn="sự xoay tròn">rotation</span>). The dry air from the Rocky
+            Mountains forms what’s called a “<span class="vocab" data-vn="lớp chặn / nắp đậy">cap</span>” that slows the
+            development of a tornado. As climate change increases, that cap is getting stronger, meaning storms that
+            used to occur in Oklahoma may now start in Central Arkansas. “It basically means you're gonna have to bake
+            your cake longer.”<br><br>
+
+            <h3>What states are in Tornado Alley?</h3>
+            Tornado Alley spreads across the Great Plains and Midwest. In 1948, two Air Force officers correctly <span
+                class="vocab" data-vn="dự đoán">predicted</span> a tornado would hit an Air Force Base, marking the
+            start of modern <span class="vocab" data-vn="cảnh báo vòi rồng">tornado warnings</span>. Four years later,
+            they first used the term “Tornado Alley.” Even though its <span class="vocab"
+                data-vn="ranh giới">boundaries</span> are shifting, experts say the traditional area isn't going away
+            because the Rocky Mountains and the Gulf of Mexico are <span class="vocab"
+                data-vn="then chốt / quan trọng">critical</span> factors.<br><br>
+
+            <h3>The rising risk in the Southeast</h3>
+            This eastern shift <span class="vocab" data-vn="đặt ra (nguy cơ)">poses</span> distinct risks. The Southeast
+            has a larger population, meaning tornadoes hit more <span class="vocab"
+                data-vn="khu vực đã phát triển / đô thị">developed areas</span>, increasing <span class="vocab"
+                data-vn="số ca tử vong">fatalities</span>. The region also has more trees that <span class="vocab"
+                data-vn="làm giảm tầm nhìn">reduce visibility</span>. Night tornadoes are more frequent here and are
+            twice as deadly because people may miss <span class="vocab" data-vn="cảnh báo quan trọng">critical
+                alerts</span> while asleep. The region also has many <span class="vocab"
+                data-vn="nhà di động (nhà tiền chế)">mobile homes</span>, which aren’t designed to <span class="vocab"
+                data-vn="chịu đựng / chống chịu">withstand</span> tornadoes.<br><br>
+
+            <h3>Societal elements and Climate Change</h3>
+            Climate change isn't the only factor; <span class="vocab" data-vn="sự gia tăng dân số">population
+                growth</span> and <span class="vocab" data-vn="sự đô thị hóa">urbanization</span> play a huge role. As
+            cities expand, more <span class="vocab" data-vn="cơ sở hạ tầng">infrastructure</span> is placed in <span
+                class="vocab" data-vn="nguy hiểm / tầm gây hại">harm's way</span>. “The tornado that was in the middle
+            of a field 50 years ago is now going through a brand-new <span class="vocab"
+                data-vn="khu dân cư / phân khu nhà ở">subdivision</span>,” Strader explains. This creates a <span
+                class="vocab" data-vn="có tính nhân bản / tích tụ">multiplicative</span> effect, making impacts grow
+            <span class="vocab" data-vn="theo cấp số nhân">exponentially</span>.<br><br>
+
+            <h3>Prediction and Safety</h3>
+            Researchers are using AI and <span class="vocab" data-vn="mô hình máy tính">computer modeling</span> to
+            improve <span class="vocab" data-vn="sự dự báo">prediction</span>. To stay safe at home, find an <span
+                class="vocab" data-vn="phòng bên trong (không cửa sổ)">interior room</span> on the lowest level or a
+            basement. If driving, look for a <span class="vocab" data-vn="hào / rãnh nước">ditch</span> or low-lying
+            area and avoid parking under bridges. Everyone should have a <span class="vocab"
+                data-vn="đài radio thời tiết">NOAA Weather Radio</span>, which alerts you even during sleep. Tornado
+            <span class="vocab" data-vn="còi báo động">sirens</span>, originally for Cold War bomb raids, were never
+            meant to be heard indoors, so you can't <span class="vocab" data-vn="dựa dẫm / tin cậy vào">rely on</span>
+            them.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(8)">🔊 Đọc Toàn bộ Passage 8</button>
             <button onclick="stopReading()">⏹ Dừng</button>
         </div>
     </div>
@@ -789,6 +962,24 @@
             if (ans) {
                 ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
             }
+        }
+
+        const totalTabs = 1000;
+        const container = document.getElementById('tab-container');
+
+        for (let i = 1; i <= totalTabs; i++) {
+            const btn = document.createElement('button');
+            btn.className = (i === 6) ? 'tab active' : 'tab'; // Giữ Passage 6 đang hoạt động như yêu cầu của thầy
+            btn.innerText = `Passage ${i}`;
+            btn.onclick = function () {
+                // Xóa class active của tất cả các nút
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Thêm active cho nút vừa bấm
+                this.classList.add('active');
+                // Gọi hàm chuyển tab của thầy
+                switchTab(i);
+            };
+            container.appendChild(btn);
         }
     </script>
 </body>
