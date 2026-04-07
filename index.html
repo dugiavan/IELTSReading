@@ -146,63 +146,89 @@
             padding: 20px 0;
         }
 
+        /* --- HIỆU ỨNG TỪ VỰNG TINH TẾ --- */
+        /* --- HIỆU ỨNG TỪ VỰNG TINH TẾ --- */
         .vocab {
             font-weight: 600;
             color: #db7093;
-            /* Hiệu ứng gạch chân highlight tinh tế */
-            background: linear-gradient(to bottom, transparent 70%, #ffd1dc 70%);
+            background: linear-gradient(to bottom, transparent 80%, #ffd1dc 80%);
             cursor: help;
             position: relative;
-            transition: all 0.2s ease;
-            /* Nhanh hơn một chút cho cảm giác mượt trên mobile */
-            padding: 0 4px;
+            padding: 0 2px;
             text-decoration: none;
-            display: inline-block;
-            /* Giúp transform hoạt động ổn định hơn */
-
-            /* TỐI ƯU CHO ANDROID */
+            display: inline;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             -webkit-tap-highlight-color: transparent;
-            /* Xóa khung xanh khi chạm */
             user-select: none;
-            /* Tránh việc học sinh vô tình bôi đen văn bản khi đang tra từ */
         }
 
-        /* Kết hợp cả Hover (PC) và Active (Mobile) */
-        .vocab:hover,
-        .vocab:active {
+        .vocab:hover {
             background: #ffd1dc;
-            color: #db7093;
             border-radius: 4px;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 209, 220, 0.4);
+            color: #db7093;
         }
 
-        /* Tối ưu Tooltip hiện ra khi chạm trên Android */
+        /* --- TOOLTIP GLASSMORPHISM (FIXED LỖI TRÀN VIỀN) --- */
         .vocab:hover::after,
         .vocab:active::after {
             content: attr(data-vn);
             position: absolute;
-            bottom: 150%;
-            /* Đẩy cao hơn để né ngón tay */
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: var(--accent);
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            bottom: 140%;
 
-            /* Tối ưu chiều rộng cho màn hình điện thoại */
-            width: max-content;
-            max-width: 250px;
+            /* THAY ĐỔI Ở ĐÂY: Không dùng left: 50% cố định */
+            left: 0;
+            transform: translateX(0);
+
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            color: #444;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+
+            z-index: 1000;
+
+            /* KHỐNG CHẾ CHIỀU RỘNG */
+            width: auto;
+            min-width: 120px;
+            max-width: 80vw;
+            /* Không bao giờ rộng quá 80% màn hình */
             white-space: normal;
-            text-align: center;
+            text-align: left;
+            /* Để lề trái nhìn sẽ gọn hơn khi ở ngoài rìa */
             pointer-events: none;
+
+            animation: tooltipSlideUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        /* Ẩn mũi tên trên mobile vì nó thường gây lệch tâm khi fix tràn viền */
+        @media (max-width: 768px) {
+            .vocab:hover::before {
+                display: none;
+            }
+
+            .vocab:hover::after {
+                /* Đảm bảo khi chạm vào, nó không bị dính sát mép trái */
+                left: -10px;
+            }
+        }
+
+        @keyframes tooltipSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Button phong cách Apple Minimalist */
@@ -266,72 +292,85 @@
     <div id="tab1" class="content tab-content">
         <h1>READING PASSAGE 1<br>Learning to Walk</h1>
         <div class="passage" id="passage1">
-            These days the feet of a typical <span class="vocab" data-vn="cư dân đô thị / người sống ở thành phố">city
+            These days the feet of a <span class="vocab" data-vn="người dân thành thị điển hình">typical city
                 dweller</span> rarely
-            <span class="vocab" data-vn="chạm trán / đối mặt với (địa hình)">encounter</span> terrain more <span
-                class="vocab" data-vn="gồ ghề / không bằng phẳng">uneven</span> than a crack in the pavement.
-            While that may not seem like a problem, it turns out that by <span class="vocab"
-                data-vn="làm cho bằng phẳng / san phẳng">flattening</span> our urban environment we have put ourselves
-            at risk of a
-            surprising number of <span class="vocab" data-vn="bệnh mãn tính (kéo dài, khó chữa dứt)">chronic
-                illnesses</span> and disabilities.
-            Fortunately, the commercial market has come to the rescue with a choice of products.<br><br>
+            <span class="vocab" data-vn="chạm trán / bắt gặp địa hình">encounter terrain</span> more <span class="vocab"
+                data-vn="gồ ghề / không bằng phẳng">uneven</span> than a <span class="vocab"
+                data-vn="vết nứt trên vỉa hè">crack in the pavement</span>.
+            While that may not <span class="vocab" data-vn="có vẻ là một vấn đề">seem like a problem</span>, it <span
+                class="vocab" data-vn="hóa ra là / thực tế cho thấy">turns out</span> that by <span class="vocab"
+                data-vn="làm phẳng môi trường đô thị">flattening our urban environment</span> we have <span
+                class="vocab" data-vn="tự đặt mình vào nguy cơ">put ourselves at risk of</span> a
+            surprising number of <span class="vocab" data-vn="bệnh mãn tính và khuyết tật">chronic illnesses and
+                disabilities</span>.
+            Fortunately, the <span class="vocab" data-vn="thị trường thương mại">commercial market</span> has <span
+                class="vocab" data-vn="đến để giải cứu / trợ giúp">come to the rescue</span> with a choice of
+            products.<br><br>
 
-            Research into the idea that flat floors could be <span class="vocab"
-                data-vn="có hại / bất lợi cho sức khỏe">detrimental</span> to
-            our health was <span class="vocab" data-vn="tiên phong / người đi đầu trong lĩnh vực">pioneered</span> back
-            in the late 1960s. <span class="vocab" data-vn="bác sĩ chuyên khoa chân">Podiatrist</span> Charles
+            Research into the idea that <span class="vocab" data-vn="sàn nhà phẳng">flat floors</span> could be <span
+                class="vocab" data-vn="có hại cho sức khỏe">detrimental to our health</span> was <span class="vocab"
+                data-vn="được tiên phong thực hiện">pioneered</span> back
+            in the late 1960s. <span class="vocab" data-vn="Bác sĩ chuyên khoa chân">Podiatrist</span> Charles
             Brantingham and <span class="vocab" data-vn="nhà sinh lý học">physiologist</span> Bruce Beekman were
-            concerned with the growing <span class="vocab" data-vn="nạn dịch / sự lan rộng của bệnh tật">epidemic</span>
-            of high blood pressure and reckoned they might be
-            linked to the <span class="vocab" data-vn="sự đồng nhất / tính đều đặn (không thay đổi)">uniformity</span>
-            of the surfaces we walk
-            on.<br><br>
+            concerned with the <span class="vocab" data-vn="nạn dịch (sự bùng phát mạnh)">growing epidemic</span> of
+            <span class="vocab" data-vn="cao huyết áp">high blood pressure</span> and <span class="vocab"
+                data-vn="phỏng đoán rằng">reckoned</span> they might be
+            <span class="vocab" data-vn="có liên quan đến">linked to</span> the <span class="vocab"
+                data-vn="tính đồng nhất của bề mặt">uniformity of the surfaces</span> we walk on.<br><br>
 
-            The trouble, they believed, was that walking continuously on flat floors concentrates forces on just a few
+            The trouble, they believed, was that walking <span class="vocab"
+                data-vn="liên tục / không ngừng nghỉ">continuously</span> on flat floors <span class="vocab"
+                data-vn="tập trung lực vào">concentrates forces on</span> just a few
             areas of the foot. As a result, these surfaces are far more <span class="vocab"
-                data-vn="dẫn đến / tạo điều kiện thuận lợi cho">conducive to</span> <span class="vocab"
+                data-vn="dẫn đến / tạo điều kiện cho">conducive to</span> <span class="vocab"
                 data-vn="hội chứng căng thẳng mãn tính">chronic stress syndromes</span> than
             natural surfaces. They understood that the <span class="vocab"
-                data-vn="cấu trúc giải phẫu học">anatomy</span> of the
-            foot parallels that of the human hand and that modern lifestyles waste all this <span class="vocab"
-                data-vn="tiềm năng / khả năng tiềm ẩn">potential</span>
-            flexibility.<br><br>
+                data-vn="cấu trúc giải phẫu của bàn chân">anatomy of the foot</span> <span class="vocab"
+                data-vn="tương đồng với">parallels</span> that of the human hand and that <span class="vocab"
+                data-vn="lối sống hiện đại">modern lifestyles</span> <span class="vocab"
+                data-vn="lãng phí khả năng tiềm ẩn">waste all this potential flexibility</span>.<br><br>
 
-            Brantingham and Beekman became convinced that the damage could be <span class="vocab"
-                data-vn="được khắc phục / sửa chữa / điều chỉnh cho đúng">rectified</span> by making people <span
-                class="vocab" data-vn="lắc lư / đi đứng không vững">wobble</span>. They tested this by having factory
-            workers stand on spongy
-            mats with varying degrees of <span class="vocab" data-vn="kháng lực / lực cản">resistance</span>. This
-            simple <span class="vocab" data-vn="sự can thiệp (trong y học/nghiên cứu)">intervention</span> made a huge
-            difference; it activated a host of
-            muscles in their legs, which in turn helped pump blood back to their hearts and reduced stress on the
-            <span class="vocab" data-vn="hệ tuần hoàn / sự lưu thông máu">circulation</span>.<br><br>
+            Brantingham and Beekman became <span class="vocab" data-vn="bị thuyết phục rằng">convinced that</span> the
+            damage could be <span class="vocab" data-vn="được khắc phục / điều chỉnh">rectified</span> by <span
+                class="vocab" data-vn="làm cho đi đứng không vững / lắc lư">making people wobble</span>. They tested
+            this by having <span class="vocab" data-vn="công nhân nhà máy">factory workers</span> stand on <span
+                class="vocab" data-vn="thảm xốp / đàn hồi">spongy mats</span> with <span class="vocab"
+                data-vn="các mức độ kháng lực khác nhau">varying degrees of resistance</span>. This
+            simple <span class="vocab" data-vn="sự can thiệp (y tế/nghiên cứu)">intervention</span> <span class="vocab"
+                data-vn="tạo ra sự khác biệt lớn">made a huge difference</span>; it <span class="vocab"
+                data-vn="kích hoạt hàng loạt cơ bắp">activated a host of muscles</span> in their legs, which <span
+                class="vocab" data-vn="theo đó / kết quả là">in turn</span> giúp bơm máu ngược về tim và giảm căng thẳng
+            cho <span class="vocab" data-vn="hệ tuần hoàn">circulation</span>.<br><br>
 
-            Earlier this year, John Fisher and colleagues designed a mat intended to <span class="vocab"
-                data-vn="tái tạo / mô phỏng lại y hệt">replicate</span> the effect of walking on <span class="vocab"
-                data-vn="đá cuội (loại đá tròn dùng lát đường)">cobblestones</span>. After 16 weeks, participants showed
-            marked improvements in
-            <span class="vocab" data-vn="khả năng vận động / di chuyển">mobility</span> and a significant reduction in
-            blood pressure. The mats are now available for purchase and
-            production is being <span class="vocab" data-vn="mở rộng quy mô sản xuất">scaled up</span>.<br><br>
+            Earlier this year, John Fisher and <span class="vocab" data-vn="các đồng nghiệp">colleagues</span> designed
+            a mat intended to <span class="vocab" data-vn="mô phỏng lại hiệu ứng">replicate the effect</span> of walking
+            on <span class="vocab" data-vn="đá cuội">cobblestones</span>. After 16 weeks, <span class="vocab"
+                data-vn="những người tham gia">participants</span> showed
+            <span class="vocab" data-vn="những cải thiện rõ rệt">marked improvements</span> in <span class="vocab"
+                data-vn="khả năng vận động">mobility</span> và <span class="vocab"
+                data-vn="sự sụt giảm đáng kể">significant reduction</span> in
+            blood pressure. The mats are now <span class="vocab" data-vn="có sẵn để mua">available for purchase</span>
+            và sản xuất đang được <span class="vocab" data-vn="mở rộng quy mô">scaled up</span>.<br><br>
 
-            In China, spas and factories promote cobblestone paths as healthful <span class="vocab"
-                data-vn="tiện nghi / cơ sở vật chất hữu ích">amenities</span>. People in Europe are also <span
-                class="vocab" data-vn="đón nhận / nồng nhiệt hưởng ứng (ý tưởng)">embracing</span> the idea, visiting
-            "barefoot
-            parks" to walk on mud, logs, and moss. If none of these appeal, a new shoe called Masai Barefoot Technology
-            offers another option. These shoes have <span class="vocab"
-                data-vn="phần đế giày được làm tròn (hình vòng cung)">rounded soles</span> that
-            cause you to rock slightly when you stand still, exercising the small muscles around the ankle responsible
-            for <span class="vocab" data-vn="sự ổn định / tính thăng bằng">stability</span>.<br><br>
+            In China, <span class="vocab" data-vn="các khu spa và nhà máy">spas and factories</span> <span class="vocab"
+                data-vn="quảng bá / thúc đẩy">promote</span> các lối đi lát đá cuội như những <span class="vocab"
+                data-vn="tiện ích tốt cho sức khỏe">healthful amenities</span>. People in Europe are also <span
+                class="vocab" data-vn="đón nhận ý tưởng">embracing the idea</span>, visiting
+            "barefoot parks" to walk on mud, logs, and moss. If none of these <span class="vocab"
+                data-vn="lôi cuốn / hấp dẫn">appeal</span>, a new shoe called Masai Barefoot Technology
+            offers another option. These shoes have <span class="vocab" data-vn="phế đế giày bo tròn / cong">rounded
+                soles</span> that
+            cause you to <span class="vocab" data-vn="đu đưa / lắc lư nhẹ">rock slightly</span> khi đứng yên, rèn luyện
+            các cơ nhỏ quanh cổ chân chịu trách nhiệm cho <span class="vocab"
+                data-vn="sự ổn định / thăng bằng">stability</span>.<br><br>
 
-            If the urban environment is <span class="vocab" data-vn="có hại / gây bất lợi">detrimental</span> to our
-            health, a far
-            simpler alternative is spending time in the countryside. However, for many citizens, the countryside is a
-            <span class="vocab" data-vn="đang cạn kiệt / giảm dần về số lượng">dwindling</span> resource as our concrete
-            cities grow at a
-            <span class="vocab" data-vn="đáng sợ / kinh khủng">terrifying</span> rate.
+            If the urban environment is <span class="vocab" data-vn="có hại cho sức khỏe">detrimental to our
+                health</span>, a <span class="vocab" data-vn="lựa chọn thay thế đơn giản hơn nhiều">far simpler
+                alternative</span> is spending time in the countryside. However, for many <span class="vocab"
+                data-vn="công dân đô thị">citizens</span>, the countryside is a
+            <span class="vocab" data-vn="nguồn tài nguyên đang cạn kiệt dần">dwindling resource</span> khi các <span
+                class="vocab" data-vn="thành phố bê tông hóa">concrete cities</span> phát triển với một <span
+                class="vocab" data-vn="tốc độ đáng sợ">terrifying rate</span>.
         </div>
 
         <div style="text-align:center; margin:40px 0;">
@@ -339,60 +378,72 @@
             <button onclick="stopReading()">⏹ Dừng</button>
         </div>
     </div>
-
     <!-- PASSAGE 2 -->
     <div id="tab2" class="content tab-content" style="display:none;">
         <h1>READING PASSAGE 2<br>Yawning</h1>
         <div class="passage" id="passage2">
-            When Robert R Provine began studying yawning in the 1960s, it was difficult for him to <span class="vocab"
-                data-vn="thuyết phục">convince</span> research students of the <span class="vocab"
-                data-vn="giá trị/lợi ích">merits</span> of ‘yawning science’. Although it may appear <span class="vocab"
-                data-vn="kì quặc">quirky</span>, his research was a logical <span class="vocab"
-                data-vn="sự mở rộng">extension</span> of <span class="vocab"
+            When Robert R Provine <span class="vocab" data-vn="bắt đầu nghiên cứu việc ngáp">began studying
+                yawning</span> in the 1960s, it was difficult for him to <span class="vocab"
+                data-vn="thuyết phục sinh viên nghiên cứu">convince research students</span> of the <span class="vocab"
+                data-vn="giá trị / lợi ích của">merits of</span> ‘yawning science’. Although it may <span class="vocab"
+                data-vn="có vẻ kì quặc">appear quirky</span>, his research was a <span class="vocab"
+                data-vn="sự mở rộng hợp lý của">logical extension of</span> <span class="vocab"
                 data-vn="khoa học thần kinh phát triển">developmental neuroscience</span>.<br><br>
 
-            The verb ‘to yawn’ is derived from the Old English <span class="vocab" data-vn="há miệng">ganien</span>,
+            The verb ‘to yawn’ is <span class="vocab" data-vn="được bắt nguồn từ">derived from</span> the Old English
+            <span class="vocab" data-vn="há miệng">ganien</span>,
             meaning to <span class="vocab" data-vn="há miệng rộng">gape</span> or open wide. Provine studied yawns by
-            using a variation of the <span class="vocab" data-vn="phản ứng lây lan">contagion response</span>, asking
-            people to 'think about yawning' to <span class="vocab" data-vn="kích hoạt">trigger</span> the act.<br><br>
+            using a <span class="vocab" data-vn="biến thể của phản ứng lây lan">variation of the contagion
+                response</span>, asking
+            people to 'think about yawning' to <span class="vocab" data-vn="kích hoạt hành động">trigger the
+                act</span>.<br><br>
 
-            Provine’s early discoveries: the yawn is highly <span class="vocab"
-                data-vn="cố định/rập khuôn">stereotyped</span> but not <span class="vocab"
-                data-vn="không thay đổi">invariant</span> in its duration. It is an excellent example of the instinctive
-            <span class="vocab" data-vn="hành vi cố định">fixed action pattern</span>. Once started, a yawn progresses
-            with the <span class="vocab" data-vn="tính tất yếu">inevitability</span> of a sneeze.<br><br>
+            Provine’s early discoveries: the yawn is <span class="vocab" data-vn="cực kỳ rập khuôn / cố định">highly
+                stereotyped</span> but not <span class="vocab" data-vn="không thay đổi về thời lượng">invariant in its
+                duration</span>. It is an <span class="vocab" data-vn="ví dụ điển hình về">excellent example of</span>
+            the <span class="vocab" data-vn="hành vi cố định theo bản năng">instinctive fixed action pattern</span>.
+            Once started, a yawn <span class="vocab" data-vn="diễn tiến với tính tất yếu">progresses with the
+                inevitability</span> of a sneeze.<br><br>
 
             There are no <span class="vocab" data-vn="ngáp nửa chừng">half-yawns</span>; this is why you cannot <span
-                class="vocab" data-vn="kìm nén">stifle</span> a yawn. Yawns can come in <span class="vocab"
-                data-vn="cơn">bouts</span> with a highly variable <span class="vocab"
-                data-vn="khoảng cách giữa các lần ngáp">inter-yawn interval</span> of about <span class="vocab"
-                data-vn="68 giây">68 seconds</span>.<br><br>
+                class="vocab" data-vn="kìm nén một cái ngáp">stifle a yawn</span>. Yawns can <span class="vocab"
+                data-vn="xảy ra theo từng đợt / cơn">come in bouts</span> with a <span class="vocab"
+                data-vn="khoảng cách giữa các lần ngáp thay đổi lớn">highly variable inter-yawn interval</span> of about
+            68 seconds.<br><br>
 
-            To understand its function, he tested three informative <span class="vocab"
-                data-vn="biến thể">variants</span>:<br>
-            1. <b>The closed nose yawn:</b> Subjects could still perform normal yawns, proving the nostrils are not
-            <span class="vocab" data-vn="thiết yếu">essential</span>.<br>
-            2. <b>The clenched teeth yawn:</b> By asking subjects to <span class="vocab" data-vn="nghiến răng">clench
-                their teeth</span>, they felt "stuck" mid-yawn. This shows that <span class="vocab"
-                data-vn="việc há hàm">gaping of the jaws</span> is a necessary <span class="vocab"
-                data-vn="thành phần/yếu tố">component</span>.<br>
+            To <span class="vocab" data-vn="hiểu được chức năng của nó">understand its function</span>, he tested three
+            <span class="vocab" data-vn="biến thể chứa nhiều thông tin">informative variants</span>:<br>
+            1. <b>The closed nose yawn:</b> Subjects could still <span class="vocab"
+                data-vn="thực hiện việc ngáp bình thường">perform normal yawns</span>, proving the nostrils are not
+            <span class="vocab" data-vn="thiết yếu / không thể thiếu">essential</span>.<br>
+            2. <b>The clenched teeth yawn:</b> By asking subjects to <span class="vocab"
+                data-vn="nghiến chặt răng">clench their teeth</span>, they felt "stuck" mid-yawn. This shows that <span
+                class="vocab" data-vn="việc há hàm">gaping of the jaws</span> is a <span class="vocab"
+                data-vn="thành phần cần thiết">necessary component</span>.<br>
             3. <b>The nose yawn:</b> Unlike normal breathing, yawning is impossible via <span class="vocab"
-                data-vn="hít vào bằng mũi">nasal inhalation</span> alone.<br><br>
+                data-vn="hít vào bằng mũi đơn thuần">nasal inhalation alone</span>.<br><br>
 
-            Yawning is a powerful movement that involves <span class="vocab" data-vn="giãn cơ">stretching</span> facial
-            muscles, tilting the head back, and even producing tears. It often shares <span class="vocab"
-                data-vn="đặc tính">properties</span> with stretching, forming a "global motor complex".<br><br>
+            Yawning is a <span class="vocab" data-vn="chuyển động mạnh mẽ">powerful movement</span> that <span
+                class="vocab" data-vn="bao gồm việc giãn cơ mặt">involves stretching facial muscles</span>, <span
+                class="vocab" data-vn="ngửa đầu ra sau">tilting the head back</span>, and even producing tears. It often
+            <span class="vocab" data-vn="có chung đặc tính với">shares properties with</span> stretching, forming a
+            "global motor complex".<br><br>
 
-            A fascinating observation involves <span class="vocab" data-vn="đột quỵ">stroke</span> patients paralyzed on
-            one side. When they yawn, their paralyzed arm may rise and <span class="vocab" data-vn="co duỗi">flex</span>
-            automatically—an <span class="vocab" data-vn="phản ứng liên kết">associated response</span>. This suggests
-            yawning activates <span class="vocab" data-vn="vô thức">unconscious</span> connections between the brain and
+            A <span class="vocab" data-vn="quan sát thú vị">fascinating observation</span> involves <span class="vocab"
+                data-vn="bệnh nhân đột quỵ">stroke patients</span> <span class="vocab"
+                data-vn="bị liệt một bên">paralyzed on one side</span>. When they yawn, their paralyzed arm may rise and
+            <span class="vocab" data-vn="co duỗi một cách tự động">flex automatically</span>—an <span class="vocab"
+                data-vn="phản ứng liên kết">associated response</span>. This suggests
+            yawning activates <span class="vocab" data-vn="các kết nối vô thức">unconscious connections</span> between
+            the brain and
             the <span class="vocab" data-vn="hệ vận động">motor system</span>.<br><br>
 
-            Ultimately, yawning seems associated with a change of <span class="vocab"
-                data-vn="trạng thái hành vi">behavioral state</span>, switching from one activity to another. It is a
-            reminder of the ancient behavior that <span class="vocab" data-vn="ẩn nấp/ẩn giấu">lurks</span> beneath the
-            <span class="vocab" data-vn="vẻ bề ngoài">veneer</span> of culture and language.
+            Ultimately, yawning seems <span class="vocab" data-vn="liên quan đến sự thay đổi của">associated with a
+                change of</span> <span class="vocab" data-vn="trạng thái hành vi">behavioral state</span>, switching
+            from one activity to another. It is a
+            reminder of the <span class="vocab" data-vn="hành vi cổ xưa">ancient behavior</span> that <span
+                class="vocab" data-vn="ẩn nấp bên dưới">lurks beneath</span> the
+            <span class="vocab" data-vn="vẻ bề ngoài của văn hóa">veneer of culture</span> and language.
         </div>
 
         <div style="text-align:center; margin:40px 0;">
@@ -404,67 +455,82 @@
     <div id="tab3" class="content tab-content" style="display:none;">
         <h1>READING PASSAGE 3<br>Endangered Languages</h1>
         <div class="passage" id="passage3">
-            ‘Nevermind whales, save the languages’, says Peter Monaghan. Worried about the loss of rain forests and the
-            ozone layer? Well, neither of those is doing any worse than the 6,000 to 7,000 languages that remain in use
-            on Earth. One half of the survivors will almost certainly be <span class="vocab"
-                data-vn="biến mất">gone</span> by 2050, while 40% more will probably be <span class="vocab"
-                data-vn="đang trên đường biến mất">well on their way out</span>. In their place, almost all humans will
-            speak one of a handful of <span class="vocab" data-vn="siêu ngôn ngữ">megalanguages</span> – Mandarin,
-            English, Spanish.<br><br>
+            ‘Nevermind whales, save the languages’, says Peter Monaghan. Worried about the <span class="vocab"
+                data-vn="sự mất mát rừng nhiệt đới">loss of rain forests</span> and the <span class="vocab"
+                data-vn="tầng ozone">ozone layer</span>? Well, neither of those is <span class="vocab"
+                data-vn="trở nên tồi tệ hơn">doing any worse than</span> the 6,000 to 7,000 languages that <span
+                class="vocab" data-vn="vẫn còn đang được sử dụng">remain in use</span> on Earth. One half of the <span
+                class="vocab" data-vn="những ngôn ngữ còn sống sót">survivors</span> will <span class="vocab"
+                data-vn="gần như chắc chắn sẽ biến mất">almost certainly be gone</span> by 2050, while 40% more will
+            probably be <span class="vocab" data-vn="đang trên đà biến mất hoàn toàn">well on their way out</span>. In
+            their place, almost all humans will speak one of a <span class="vocab"
+                data-vn="một số ít các siêu ngôn ngữ">handful of megalanguages</span> – Mandarin, English,
+            Spanish.<br><br>
 
-            Linguists know what causes languages to disappear, but less often <span class="vocab"
-                data-vn="được nhận xét/đề cập">remarked</span> is what happens on the way to disappearance: languages’
-            vocabularies, grammars and <span class="vocab" data-vn="tiềm năng biểu đạt">expressive potential</span> all
-            <span class="vocab" data-vn="suy giảm">diminish</span>. When a community <span class="vocab"
-                data-vn="chuyển sang">goes over</span> from a traditional language to a <span class="vocab"
-                data-vn="ngôn ngữ hỗn hợp">creole</span>, they leave behind a very fine vocabulary for the landscape. As
-            speakers become less able to express the <span class="vocab" data-vn="sự giàu có về kiến thức">wealth of
-                knowledge</span> that has filled <span class="vocab" data-vn="tổ tiên">ancestors’</span> lives,
-            communities tend to become <span class="vocab" data-vn="bị xuống tinh thần">demoralised</span>.<br><br>
+            Linguists know what causes languages to disappear, but <span class="vocab"
+                data-vn="ít khi được đề cập đến là">less often remarked is</span> what happens on the way to
+            disappearance: languages’ vocabularies, grammars and <span class="vocab"
+                data-vn="tiềm năng biểu đạt">expressive potential</span> all <span class="vocab"
+                data-vn="bị suy giảm / thu hẹp">diminish</span>. When a community <span class="vocab"
+                data-vn="chuyển từ... sang...">goes over from</span> a traditional language to a <span class="vocab"
+                data-vn="ngôn ngữ hỗn hợp (creole)">creole</span>, they leave behind a very <span class="vocab"
+                data-vn="vốn từ vựng tinh vi / chi tiết">fine vocabulary</span> for the landscape. As speakers become
+            less able to express the <span class="vocab" data-vn="sự giàu có về kiến thức">wealth of knowledge</span>
+            that has filled <span class="vocab" data-vn="đời sống của tổ tiên">ancestors’ lives</span>, communities
+            <span class="vocab" data-vn="có xu hướng bị xuống tinh thần">tend to become demoralised</span>.<br><br>
 
             If the losses are so huge, why are relatively few linguists <span class="vocab"
-                data-vn="chiến đấu chống lại">combating</span> the situation? Australian linguists have achieved a great
-            deal in terms of <span class="vocab" data-vn="bảo tồn">preserving</span> languages, resulting in good <span
-                class="vocab" data-vn="tài liệu hóa">documentation</span>. In England, Peter Austin has directed efforts
-            to <span class="vocab" data-vn="hạn chế">limit</span> language loss. However, at linguistics meetings in the
-            US, there is growing evidence that not all approaches will be particularly helpful. Some linguists boast of
-            more and more <span class="vocab" data-vn="tinh vi/phức tạp">sophisticated</span> means of <span
-                class="vocab" data-vn="ghi lại/thu thập">capturing</span> languages: digital recording and
-            storage.<br><br>
+                data-vn="đang đấu tranh chống lại tình trạng này">combating the situation</span>? Australian linguists
+            have <span class="vocab" data-vn="đạt được nhiều thành tựu trong việc">achieved a great deal in terms
+                of</span> <span class="vocab" data-vn="bảo tồn ngôn ngữ">preserving languages</span>, resulting in <span
+                class="vocab" data-vn="tài liệu hóa / lưu trữ tốt">good documentation</span>. In England, Peter Austin
+            has <span class="vocab" data-vn="trực tiếp chỉ đạo các nỗ lực nhằm">directed efforts to</span> <span
+                class="vocab" data-vn="hạn chế sự mất mát ngôn ngữ">limit language loss</span>. However, there is <span
+                class="vocab" data-vn="bằng chứng ngày càng rõ rệt rằng">growing evidence that</span> not all <span
+                class="vocab" data-vn="phương pháp tiếp cận">approaches</span> will be particularly helpful. Some
+            linguists <span class="vocab" data-vn="tự hào về / khoe khoang về">boast of</span> more and more <span
+                class="vocab" data-vn="các phương tiện thu thập tinh vi">sophisticated means of capturing</span>
+            languages: digital recording and storage.<br><br>
 
             But these encourage the "quick dash" style of recording trip. That’s not quite what some <span class="vocab"
-                data-vn="chuyên gia">specialists</span> have been seeking for 30 years. Michael Krauss complains that
-            linguists are playing with <span class="vocab" data-vn="những thứ không thiết yếu">non-essentials</span>
-            while most of their <span class="vocab" data-vn="dữ liệu thô">raw data</span> is disappearing. Who is to
-            blame? Many blame those <span class="vocab" data-vn="ám ảnh">obsessed</span> with **Noam Chomsky’s**
-            approaches. <span class="vocab" data-vn="các nhà ngôn ngữ học lý thuyết">Theoretical linguists</span> have
-            had so much influence that the <span class="vocab" data-vn="giới chuyên môn">profession</span> has largely
-            ignored the continuing disappearance of languages.<br><br>
+                data-vn="các chuyên gia">specialists</span> have been <span class="vocab"
+                data-vn="tìm kiếm trong suốt 30 năm">seeking for 30 years</span>. Michael Krauss complains that
+            linguists are <span class="vocab" data-vn="sa đà vào những thứ không thiết yếu">playing with
+                non-essentials</span> while most of their <span class="vocab" data-vn="dữ liệu thô">raw data</span> is
+            disappearing. Who is <span class="vocab" data-vn="đáng bị khiển trách">to blame</span>? Many blame those
+            <span class="vocab" data-vn="bị ám ảnh bởi">obsessed with</span> Noam Chomsky’s approaches. <span
+                class="vocab" data-vn="các nhà ngôn ngữ học lý thuyết">Theoretical linguists</span> have had <span
+                class="vocab" data-vn="có sức ảnh hưởng lớn đến mức">so much influence that</span> the <span
+                class="vocab" data-vn="giới chuyên môn">profession</span> has <span class="vocab"
+                data-vn="phần lớn đã lờ đi">largely ignored</span> the continuing disappearance of languages.<br><br>
 
             Chomsky’s <span class="vocab" data-vn="tác phẩm mang tính cột mốc">landmark work</span> of 1957 argues that
-            all languages <span class="vocab" data-vn="thể hiện/phô bày">exhibit</span> certain <span class="vocab"
-                data-vn="phổ quát">universal</span> grammatical features, <span class="vocab"
-                data-vn="được mã hóa">encoded</span> in the human mind. Creating dictionaries and grammars requires
-            <span class="vocab" data-vn="kéo dài">prolonged</span> and <span class="vocab"
-                data-vn="tận tụy">dedicated</span> work. Documentary linguists must observe not only <span class="vocab"
-                data-vn="sự tinh tế về cấu trúc">structural subtleties</span>, but also social and political factors.
-            Such work calls for <span class="vocab" data-vn="kiên trì/liên tục">persistent</span> funding for field
-            scientists who may <span class="vocab" data-vn="mạo hiểm đi vào">venture</span> into <span class="vocab"
-                data-vn="khắc nghiệt">harsh</span> and even <span class="vocab" data-vn="nguy hiểm">hazardous</span>
-            places.<br><br>
+            all languages <span class="vocab" data-vn="thể hiện các đặc điểm... nhất định">exhibit certain grammatical
+                features</span>, <span class="vocab" data-vn="được mã hóa trong tâm trí">encoded in the human
+                mind</span>. Creating dictionaries and grammars requires <span class="vocab"
+                data-vn="sự làm việc kiên trì và tận tụy">prolonged and dedicated work</span>. Documentary linguists
+            must <span class="vocab" data-vn="quan sát những sự tinh tế về cấu trúc">observe structural
+                subtleties</span>, but also social and political factors. Such work <span class="vocab"
+                data-vn="đòi hỏi nguồn kinh phí duy trì">calls for persistent funding</span> for field scientists who
+            may <span class="vocab" data-vn="mạo hiểm đi vào">venture into</span> <span class="vocab"
+                data-vn="những nơi khắc nghiệt và nguy hiểm">harsh and even hazardous places</span>.<br><br>
 
-            Once there, they may face difficulties such as community <span class="vocab"
-                data-vn="sự nghi ngờ">suspicion</span>. Parents may <span class="vocab" data-vn="từ bỏ">give up</span>
-            using the language with their children, believing they will benefit from speaking a more <span class="vocab"
-                data-vn="được hiểu rộng rãi">widely understood</span> one. The highest <span class="vocab"
-                data-vn="rào cản">barrier</span> to language preservation is the profession's emphasis on theory, which
-            <span class="vocab" data-vn="làm mòn/làm giảm">wears down</span> the enthusiasm of linguists. While Chomsky
-            has recently spoken in support of preservation, his argument remains <span class="vocab"
-                data-vn="không ủy mị/thực tế">unsentimental</span>: the loss of a language is a tragedy because it means
-            the permanent loss of the most <span class="vocab" data-vn="liên quan/thích hợp">relevant</span> data.
-            However, Nick Evans objects, arguing that the process of <span class="vocab"
-                data-vn="sự đắm mình/nhúng mình">immersion</span> in a language is the most <span class="vocab"
-                data-vn="đòi hỏi khắt khe">demanding</span> intellectual task.<br>
+            Once there, they may <span class="vocab" data-vn="đối mặt với những khó khăn như là">face difficulties such
+                as</span> community <span class="vocab" data-vn="sự nghi ngờ của cộng đồng">suspicion</span>. Parents
+            may <span class="vocab" data-vn="từ bỏ việc sử dụng">give up using</span> the language with their children,
+            believing they will <span class="vocab" data-vn="có lợi từ việc nói một ngôn ngữ...">benefit from
+                speaking</span> a more <span class="vocab" data-vn="được hiểu rộng rãi hơn">widely understood
+                one</span>. The <span class="vocab" data-vn="rào cản lớn nhất đối với...">highest barrier to</span>
+            language preservation is the profession's <span class="vocab" data-vn="nhấn mạnh vào lý thuyết">emphasis on
+                theory</span>, which <span class="vocab" data-vn="làm xói mòn lòng nhiệt huyết">wears down the
+                enthusiasm</span> of linguists. While Chomsky has recently <span class="vocab"
+                data-vn="lên tiếng ủng hộ việc bảo tồn">spoken in support of preservation</span>, his argument remains
+            <span class="vocab" data-vn="thực tế / không ủy mị">unsentimental</span>: the loss of a language is a
+            tragedy because it means the <span class="vocab" data-vn="mất mát vĩnh viễn">permanent loss</span> of the
+            most <span class="vocab" data-vn="dữ liệu liên quan nhất">relevant data</span>. However, Nick Evans <span
+                class="vocab" data-vn="phản đối / không đồng ý">objects</span>, arguing that the process of <span
+                class="vocab" data-vn="sự đắm mình vào một ngôn ngữ">immersion in a language</span> is the most <span
+                class="vocab" data-vn="nhiệm vụ trí tuệ khắt khe nhất">demanding intellectual task</span>.<br>
         </div>
 
         <div style="text-align:center; margin:40px 0;">
@@ -911,6 +977,662 @@
 
         <div style="text-align:center; margin:40px 0;">
             <button onclick="readPassage(8)">🔊 Đọc Toàn bộ Passage 8</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab9" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 9<br>Ahead of Its Time</h1>
+        <div class="passage" id="passage9">
+            A <span class="vocab" data-vn="sự phát hiện tình cờ">chance discovery</span> in New Zealand has <span
+                class="vocab" data-vn="thách thức lịch sử được ghi chép lại">challenged the country’s recorded
+                history</span>.<br><br>
+
+            One October afternoon, a young New Zealander, Sam Tobin, called his dogs and went for a walk down to the
+            nearby Ruamahanga River. Having been very high for days, the river had <span class="vocab"
+                data-vn="cuối cùng đã rút xuống">at last fallen</span>, and Tobin was <span class="vocab"
+                data-vn="háo hức muốn xem">eager to see</span> what changes the floods had brought. The family farm
+            <span class="vocab" data-vn="giáp với con sông">borders the river</span> and a four-metre-high <span
+                class="vocab" data-vn="đê ngăn lũ">flood bank</span> <span class="vocab"
+                data-vn="chứng minh cho / minh chứng cho">testifies to</span> its <span class="vocab"
+                data-vn="xu hướng tự nhiên">natural tendency</span> to flood.<br><br>
+
+            Tobin stepped out onto a <span class="vocab" data-vn="bãi cát rộng bên sông">broad shoulder of river
+                sand</span>, where he noticed what he <span class="vocab" data-vn="ban đầu cho là">initially took to
+                be</span> a whitish rock, lit by the sun. Then, getting closer, he realised it was a bone. Such a thing
+            was <span class="vocab" data-vn="không hề hiếm gặp">not uncommon</span> in những vùng này - he had often
+            <span class="vocab" data-vn="tình cờ thấy các mảnh xương">come across bone fragments</span>, or even <span
+                class="vocab" data-vn="toàn bộ bộ xương">whole skeletons</span>, of cows and sheep. But as he <span
+                class="vocab" data-vn="gạt đống đá sang một bên">scraped aside the stones</span> he realised it was a
+            human bone, something <span class="vocab" data-vn="hoàn toàn mới lạ trong kinh nghiệm của anh">quite new in
+                his experience</span>. As he picked it up, he saw it was a skull, <span class="vocab"
+                data-vn="bị đổi màu theo thời gian">discoloured with age</span>.<br><br>
+
+            Tobin <span class="vocab" data-vn="đặt hộp sọ lại chỗ cũ">replaced the skull</span> and hurried home to tell
+            his mother what the river had <span class="vocab" data-vn="mang đến tận cửa nhà">delivered to their
+                doorstep</span>. It would <span class="vocab" data-vn="hóa ra là một phát hiện ngoạn mục">prove to be a
+                spectacular find</span>, <span class="vocab" data-vn="khởi động một cuộc điều tra">setting in motion an
+                investigation</span> by some of the country’s <span class="vocab"
+                data-vn="các chuyên gia uy tín nhất">most respected specialists</span>, and ultimately <span
+                class="vocab" data-vn="thách thức những khẳng định chắc chắn nhất">challenging our most firmly held
+                assertions</span> about the <span class="vocab" data-vn="sự định cư của con người">human
+                settlement</span> of New Zealand.<br><br>
+
+            The police were immediately called, but despite a <span class="vocab"
+                data-vn="cuộc tìm kiếm kỹ lưỡng">thorough search</span> could find nothing that might <span
+                class="vocab" data-vn="làm sáng tỏ danh tính">shed light on the identity</span> of the Ruamahanga skull,
+            or the <span class="vocab" data-vn="hoàn cảnh xuất hiện bất ngờ">circumstances of its sudden
+                appearance</span>. The skull was then taken north to be <span class="vocab"
+                data-vn="được kiểm tra bởi bác sĩ pháp y">examined by forensic pathologist</span> Dr Ferris, at Auckland
+            Hospital. Despite being <span class="vocab" data-vn="bị cản trở bởi tình trạng hư hỏng">hampered by its
+                damaged condition</span> - the jawbone and lower left portion of the <span class="vocab"
+                data-vn="hộp sọ">cranium</span> were missing - Dr Ferris <span class="vocab"
+                data-vn="xác định rằng">determined that</span> the skull was that of a female. He then <span
+                class="vocab" data-vn="tham vấn đồng nghiệp">consulted with a colleague</span>, Dr Koelmeyer, who
+            believed that the <span class="vocab" data-vn="sự xuống cấp của xương">deterioration of the bone</span>
+            placed the time of death <span class="vocab" data-vn="trước thời đại mà con người còn nhớ được">before
+                living memory</span> and, most significantly as it would turn out, the skull appeared to be <span
+                class="vocab" data-vn="có nguồn gốc châu Âu">European in origin</span>.<br><br>
+
+            Wellington-based <span class="vocab" data-vn="nhà nhân chủng học pháp y">forensic anthropologist</span> Dr
+            Watt also examined the skull, and suggested it belonged to a 40-45 year-old. He believed that it could be
+            the <span class="vocab" data-vn="di hài của một vụ chôn cất cũ tại trang trại">remains of an old farm
+                burial</span>, but was not certain, and proposed the use of <span class="vocab"
+                data-vn="định tuổi bằng carbon phóng xạ">radiocarbon dating</span> to <span class="vocab"
+                data-vn="đảm bảo / xác minh">make sure</span> it wasn’t a recent death. As a result, the Institute of
+            Geological and Nuclear Sciences (GNS) was contacted, and provided with a <span class="vocab"
+                data-vn="mẫu xương">sample of bone</span>. In a little over three weeks the <span class="vocab"
+                data-vn="kết quả đáng kinh ngạc">seemingly astonishing results</span> came back. <span class="vocab"
+                data-vn="vượt qua sự phức tạp rối rắm">Cutting through the bewildering complexity</span> of the
+            scientific analysis was a single line reading: <span class="vocab"
+                data-vn="tuổi carbon phóng xạ thông thường">conventional radiocarbon age</span> approximately 296 years.
+            This was <span class="vocab" data-vn="gây sững sờ">staggering</span>, for the skull was about 200 years
+            older than Dr Koelmeyer had believed.<br><br>
+
+            Of course, a skull of this age wasn’t <span class="vocab" data-vn="đặc biệt bất thường">particularly
+                unusual</span> in New Zealand. The Maori people have been living in the country for at least 800 years
+            and scientists frequently <span class="vocab" data-vn="bắt gặp di hài người">come across human
+                remains</span> of <span class="vocab" data-vn="độ tuổi đáng kể">considerable age</span>. The <span
+                class="vocab" data-vn="câu hỏi hấp dẫn">fascinating question</span>, however, was how a skull of this
+            <span class="vocab" data-vn="chủng tộc / sắc tộc">race</span>, <span class="vocab"
+                data-vn="chưa nói đến giới tính này">let alone this gender</span>, had reached những hòn đảo xa xôi này
+            long before the <span class="vocab" data-vn="sự xuất hiện của nhà thám hiểm">arrival of the explorer</span>
+            Captain Cook in 1769, and perhaps even before the <span class="vocab"
+                data-vn="lần đầu tiên người châu Âu đặt chân lên đất liền">very first European landfall</span> – the
+            <span class="vocab" data-vn="chuyến thăm chớp nhoáng">fleeting visit</span> of the Dutch explorer Tasman in
+            1642 – neither of whom had women among their crews.<br><br>
+
+            The first known European women in the Pacific came with a <span class="vocab"
+                data-vn="chuyến đi thuộc địa hóa đầy bi kịch">doomed colonising venture</span> which sailed from Peru in
+            1595 under the <span class="vocab" data-vn="dưới sự chỉ huy của">command of</span> Spanish captain Mendana.
+            However, it is <span class="vocab" data-vn="không có khả năng / khó có thể">unlikely</span> the Ruamahanga
+            skull <span class="vocab" data-vn="nguồn gốc từ cuộc thám hiểm này">originated from this expedition</span>
+            because no evidence of Mendana’s ships has ever been found in New Zealand, while a <span class="vocab"
+                data-vn="nhóm các nhà khảo cổ">team of archaeologists</span> working in the Solomon Islands in 1970 did
+            discover the remains of European <span class="vocab" data-vn="tàu thuyền">vessels</span> dating from the
+            16th century.<br><br>
+
+            Two centuries were to pass before the first <span class="vocab"
+                data-vn="phụ nữ châu Âu được ghi nhận">recorded European females</span> arrived in New Zealand, both
+            having <span class="vocab" data-vn="vượt ngục / trốn khỏi tù">escaped from prison</span> in Australia. How
+            do we <span class="vocab" data-vn="giải thích cho / lý giải cho">account for</span> the Ruamahanga skull,
+            which appears to be about 100 years older than that? It is impossible to say <span class="vocab"
+                data-vn="nói một cách chắc chắn">with certainty</span>, but the <span class="vocab"
+                data-vn="lời giải thích hợp lý nhất">most likely explanation</span> is that a Spanish or Portuguese
+            <span class="vocab" data-vn="tàu buôn">trading-ship</span> was <span class="vocab"
+                data-vn="bị dạt vào những bờ biển hoang dã này">washed onto these wild shores</span> as a result of a
+            <span class="vocab" data-vn="đắm tàu">shipwreck</span> and a woman got ashore. <span class="vocab"
+                data-vn="khó tin / phi lý">Implausible</span>, perhaps, but the Ruamahanga skull could be the kind of
+            <span class="vocab" data-vn="bằng chứng cụ thể">concrete evidence</span> that <span class="vocab"
+                data-vn="đòi hỏi một sự đánh giá lại lịch sử">demands such a re-evaluation of history</span>.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(9)">🔊 Đọc Passage 9</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab10" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 10<br>Mind Music</h1>
+        <div class="passage" id="passage10">
+            <b>A.</b> Ever had a song <span class="vocab" data-vn="bị kẹt trong đầu">stuck in your head</span>, playing
+            on an <span class="vocab" data-vn="vòng lặp vô tận">endless loop</span>? Scientists call them ‘<span
+                class="vocab" data-vn="hình ảnh âm nhạc vô thức">involuntary musical images</span>’, or ‘earworms’, and
+            a <span class="vocab" data-vn="làn sóng nghiên cứu mới">wave of new research</span> is <span class="vocab"
+                data-vn="làm sáng tỏ / giải mã">shining light on</span> why they <span class="vocab"
+                data-vn="xảy ra / xuất hiện">occur</span> and what can be learned from them. Some <span class="vocab"
+                data-vn="nhà thần kinh học">neuroscientists</span> and <span class="vocab"
+                data-vn="nhà tâm lý học nhận thức">cognitive psychologists</span> are studying earworms to <span
+                class="vocab" data-vn="khám phá những bí ẩn của trí nhớ">explore the mysteries of memory</span> and the
+            part of the brain that is <span class="vocab" data-vn="vượt ngoài sự kiểm soát có ý thức">beyond our
+                conscious control</span>. ‘The ý tưởng rằng chúng ta có toàn quyền kiểm soát quá trình tư duy là <span
+                class="vocab" data-vn="một sự ảo tưởng">an illusion</span>,’ says psychologist Lauren Stewart.
+            Researchers haven’t been able to watch what happens in the brain because they happen <span class="vocab"
+                data-vn="không thể dự đoán trước">unpredictably</span>. Much of what is known <span class="vocab"
+                data-vn="đến từ các cuộc khảo sát">comes from surveys</span>, questionnaires, diaries and <span
+                class="vocab" data-vn="thí nghiệm phòng lab">lab experiments</span>.<br><br>
+
+            <b>B.</b> A study showed that the singing we hear in our heads <span class="vocab"
+                data-vn="có xu hướng khớp với bản gốc">tends to be true to actual recordings</span>. Researchers had 17
+            volunteers <span class="vocab" data-vn="vỗ tay/gõ theo nhịp">tap to the beat</span> of any earworm. The
+            <span class="vocab" data-vn="nhịp độ gõ">tapping tempos</span> were <span class="vocab"
+                data-vn="trong khoảng sai số 10%">within 10% of</span> the tempos of the original recordings. Another
+            study found that people who find them most <span class="vocab"
+                data-vn="gây khó chịu / làm phiền">intrusive</span>, have slightly different <span class="vocab"
+                data-vn="cấu trúc não bộ">brain structures</span>, with more <span class="vocab" data-vn="chất xám">gray
+                matter</span> in areas <span class="vocab" data-vn="liên quan đến xử lý cảm xúc">associated with
+                processing emotions</span>.<br><br>
+
+            <b>C.</b> Studies also show that the music in our heads often starts playing during times of ‘<span
+                class="vocab" data-vn="tải lượng nhận thức thấp (lúc rảnh trí)">low cognitive load</span>’, such as
+            while showering or doing chores. Dr Stewart <span class="vocab" data-vn="ví von earworms như là">likens
+                earworms to</span> ‘<span class="vocab" data-vn="màn hình chờ bằng âm thanh">sonic screen savers</span>’
+            that keep the mind entertained while it is otherwise <span class="vocab"
+                data-vn="không bận rộn / đang trống">unoccupied</span>. She observed that <span class="vocab"
+                data-vn="hoạt động càng thử thách / khó">the more challenging the activity</span>, <span class="vocab"
+                data-vn="càng ít khả năng">the less likely</span> the volunteers were to hear the music. Songs tend to
+            <span class="vocab" data-vn="khớp với tâm trạng của con người">match people’s moods</span> and therefore
+            they are not <span class="vocab" data-vn="ngẫu nhiên">random</span>. If you are <span class="vocab"
+                data-vn="tràn đầy năng lượng và vui vẻ">energized and upbeat</span>, an earworm is likely to be <span
+                class="vocab" data-vn="nhịp độ nhanh">uptempo</span> too.<br><br>
+
+            <b>D.</b> Songs the brain <span class="vocab" data-vn="ám ảnh / chú tâm quá mức">fixates on</span> are
+            thường là những bài nó <span class="vocab" data-vn="tiếp xúc gần đây">been exposed to recently</span>, which
+            is why tunes getting <span class="vocab" data-vn="được phát liên tục trên đài">heavy radio play</span>
+            frequently <span class="vocab" data-vn="đứng đầu bảng xếp hạng">top the earworm charts</span>. Even tunes
+            you didn’t <span class="vocab" data-vn="chú ý đến">pay attention to</span> can <span class="vocab"
+                data-vn="len lỏi vào tiềm thức">worm their way into your subconscious</span>.<br><br>
+
+            <b>E.</b> Some earworms are just <span class="vocab" data-vn="các đoạn nhạc ngắn">fragments of a song</span>
+            that repeat like a <span class="vocab" data-vn="đĩa nhạc bị hỏng">broken record</span>. So, when the mind
+            hits a part of a song it can’t remember, it <span class="vocab" data-vn="lặp lại từ đầu">loops back</span>
+            rather than moving on. That could make an earworm even more <span class="vocab"
+                data-vn="bám rễ sâu / khó bỏ">entrenched</span>. According to a theory known as the <span class="vocab"
+                data-vn="hiệu ứng Zeigarnik">Zeigarnik effect</span>, <span class="vocab"
+                data-vn="những suy nghĩ chưa hoàn thành">unfinished thoughts</span> and activities <span class="vocab"
+                data-vn="đè nặng lên tâm trí">weigh on the mind more heavily</span> than those that are
+            completed.<br><br>
+
+            <b>F.</b> Researchers say they can’t <span class="vocab" data-vn="xác định chính xác một điểm">pinpoint a
+                spot</span> in the brain where earworms live. <span class="vocab"
+                data-vn="nghiên cứu hình ảnh học">Imaging studies</span> have shown that <span class="vocab"
+                data-vn="cố tình tưởng tượng">deliberately imagining</span> music and actually listening to music <span
+                class="vocab" data-vn="kích hoạt cùng một mạng lưới thần kinh">activate many of the same neurological
+                networks</span>. Subjects listening to <span class="vocab" data-vn="âm nhạc quen thuộc">familiar
+                music</span> activated the <span class="vocab" data-vn="vùng vận động bổ trợ">supplementary motor
+                area</span>, which is <span class="vocab" data-vn="thường liên quan đến">typically involved in</span>
+            remembering <span class="vocab" data-vn="các chuỗi / trình tự">sequences</span>.<br><br>
+
+            <b>G.</b> One factor that makes some songs <span class="vocab"
+                data-vn="trở nên khó quên / đọng lại">stick</span> might be repetition. ‘Repetition leads to <span
+                class="vocab" data-vn="sự quen thuộc">familiarity</span> which leads to <span class="vocab"
+                data-vn="sự mong đợi">anticipation</span>,’ says John Seabrook. Producers <span class="vocab"
+                data-vn="bơm đầy các 'móc câu' âm thanh">pump pop songs full of aural hooks</span>, the <span
+                class="vocab" data-vn="những cụm giai điệu mạnh mẽ / bắt tai">punchy melodic phrases</span> designed to
+            <span class="vocab" data-vn="nhắm vào não bộ">target the brain</span>. Songs với tiềm năng thành earworm
+            thường chia sẻ các đặc điểm: a <span class="vocab"
+                data-vn="mẫu lặp lại của sự thăng trầm về cao độ">repeating pattern of ups and downs in pitch</span>,
+            and an <span class="vocab" data-vn="khoảng cách âm nhạc bất thường">塑造 irregular musical
+                interval</span>.<br><br>
+
+            <b>H.</b> The researchers plan next to <span class="vocab"
+                data-vn="kiểm chứng kết quả theo chiều ngược lại">test their results in reverse</span>. They are looking
+            at whether people at <span class="vocab" data-vn="các giai đoạn khác nhau của cuộc đời">different stages of
+                life</span> experience earworms differently. ‘Older people might get them more often because they <span
+                class="vocab" data-vn="biết nhiều bài hát hơn">know more songs</span>,’ Dr Halpern says. ‘But the few
+            <span class="vocab" data-vn="phản hồi">responses</span> we have so far <span class="vocab"
+                data-vn="chỉ ra rằng">indicate that</span> they have earworms less often.’
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(10)">🔊 Đọc Passage 10</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab11" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 11<br>Information Theory</h1>
+        <div class="passage" id="passage11">
+            <span class="vocab" data-vn="Lý thuyết thông tin">Information theory</span> <span class="vocab"
+                data-vn="nằm ở cốt lõi của">lies at the heart of</span> everything – from DVD players and the <span
+                class="vocab" data-vn="mã di truyền">genetic code</span> of DNA to the physics of the universe at its
+            <span class="vocab" data-vn="mức độ cơ bản nhất">most fundamental</span>. It has been <span class="vocab"
+                data-vn="đóng vai trò trung tâm đối với">central to the development of</span> the science of
+            communication, which <span class="vocab" data-vn="cho phép dữ liệu được gửi đi">enables data to be
+                sent</span> electronically and has therefore had a <span class="vocab" data-vn="tác động lớn đến">major
+                impact on</span> our lives.<br><br>
+
+            <b>A.</b> In April 2002 an event <span class="vocab" data-vn="diễn ra">took place</span> which <span
+                class="vocab" data-vn="chứng minh / minh họa cho">demonstrated</span> one of the many <span
+                class="vocab" data-vn="ứng dụng">applications</span> of information theory. The <span class="vocab"
+                data-vn="tàu thăm dò không gian">space probe</span>, Voyager I, <span class="vocab"
+                data-vn="được phóng đi">launched</span> in 1977, had sent back <span class="vocab"
+                data-vn="hình ảnh ngoạn mục">spectacular images</span> of Jupiter and Saturn and then <span
+                class="vocab" data-vn="bay vút ra ngoài">soared out of</span> the Solar System on a <span class="vocab"
+                data-vn="nhiệm vụ một chiều">one-way mission</span> to the stars. After 25 years of <span class="vocab"
+                data-vn="tiếp xúc với">exposure to</span> the freezing temperatures of <span class="vocab"
+                data-vn="không gian sâu thẳm">deep space</span>, the probe was beginning to <span class="vocab"
+                data-vn="cho thấy dấu hiệu tuổi tác">show its age</span>. Sensors and circuits were <span class="vocab"
+                data-vn="trên bờ vực thất bại / hỏng hóc">on the brink of failing</span> and NASA experts realised that
+            they had to do something or <span class="vocab" data-vn="mất liên lạc với">lose contact with</span> their
+            probe forever. The solution was to instruct it to use <span class="vocab"
+                data-vn="phụ tùng thay thế">spares</span> to change the failing parts. With the probe 12 billion
+            kilometres from Earth, this was <span class="vocab" data-vn="không phải là một nhiệm vụ dễ dàng">not an easy
+                task</span>. By means of a <span class="vocab" data-vn="đĩa thu phát vô tuyến">radio dish</span>, the
+            message was sent out into the <span class="vocab" data-vn="vực thẳm của không gian">depths of space</span>.
+            Yet, <span class="vocab" data-vn="đáng kinh ngạc thay">incredibly</span>, the little probe managed to hear
+            the <span class="vocab" data-vn="tiếng gọi yếu ớt">faint call</span> from its home planet, and successfully
+            <span class="vocab" data-vn="thực hiện việc chuyển đổi">made the switchover</span>.<br><br>
+
+            <b>B.</b> It was the longest-distance <span class="vocab" data-vn="công việc sửa chữa">repair job</span> in
+            history, and a <span class="vocab" data-vn="một thắng lợi cho">triumph for</span> the NASA engineers. But it
+            also <span class="vocab" data-vn="làm nổi bật sức mạnh đáng kinh ngạc">highlighted the astonishing
+                power</span> of the techniques developed by Claude Shannon. Shannon showed an <span class="vocab"
+                data-vn="tài năng sớm bộc lộ">early talent</span> for maths and for <span class="vocab"
+                data-vn="chế tạo các thiết bị">building gadgets</span>, and made <span class="vocab"
+                data-vn="những đột phá trong">breakthroughs in</span> the <span class="vocab"
+                data-vn="nền tảng của công nghệ máy tính">foundations of computer technology</span>. While at Bell
+            Laboratories, Shannon developed information theory, but <span class="vocab"
+                data-vn="tránh né sự tán dương">shunned the resulting acclaim</span>. He <span class="vocab"
+                data-vn="đơn phương độc mã">single-handedly</span> created an entire science of communication which has
+            since <span class="vocab" data-vn="len lỏi vào / thâm nhập vào">inveigled its way into</span> a host of
+            applications – any area, in short, where data has to be <span class="vocab"
+                data-vn="truyền tải nhanh chóng nhưng chính xác">conveyed rapidly yet accurately</span>.<br><br>
+
+            <b>C.</b> This all dường như <span class="vocab" data-vn="cách xa vạn dặm">light years away</span> from the
+            <span class="vocab" data-vn="những mục đích thực tế">down-to-earth uses</span> Shannon originally had for
+            his work. He <span class="vocab" data-vn="bắt đầu thực hiện với">set out with</span> an apparently simple
+            aim: to <span class="vocab" data-vn="xác định chính xác ý nghĩa">pin down the precise meaning</span> of the
+            concept of ‘information’. The <span class="vocab" data-vn="dạng cơ bản nhất">most basic form</span> of
+            information, Shannon argued, can be <span class="vocab" data-vn="được ghi lại dưới dạng nhị phân">captured
+                in the binary unit</span>, or ‘bit’, of the form 1 or 0. Having <span class="vocab"
+                data-vn="xác định được đơn vị nền tảng">identified this fundamental unit</span>, Shannon <span
+                class="vocab" data-vn="bắt tay vào định nghĩa">set about defining</span> otherwise <span class="vocab"
+                data-vn="các ý tưởng mơ hồ">vague ideas</span>. In the process he discovered something surprising: it is
+            always possible to <span class="vocab" data-vn="đảm bảo thông tin sẽ truyền qua được">guarantee information
+                will get through</span> <span class="vocab" data-vn="sự nhiễu loạn ngẫu nhiên">random
+                interference</span> – ‘noise’ – <span class="vocab" data-vn="nguyên vẹn">intact</span>.<br><br>
+
+            <b>D.</b> ‘Noise’ usually means <span class="vocab" data-vn="những âm thanh không mong muốn">unwanted
+                sounds</span> which <span class="vocab" data-vn="can thiệp vào / gây nhiễu">interfere with</span>
+            genuine information. Information theory <span class="vocab" data-vn="khái quát hóa ý tưởng này">generalises
+                this idea</span> via <span class="vocab" data-vn="các định lý">theorems</span> that capture the effects
+            of noise with <span class="vocab" data-vn="độ chính xác về toán học">mathematical precision</span>. In
+            particular, Shannon showed that noise <span class="vocab" data-vn="đặt ra một giới hạn cho">sets a limit
+                on</span> the rate at which information can pass along <span class="vocab"
+                data-vn="kênh truyền thông">communication channels</span> while remaining <span class="vocab"
+                data-vn="không có lỗi">error-free</span>. This rate depends on the <span class="vocab"
+                data-vn="cường độ tương đối của tín hiệu">relative strengths of the signal</span> and noise, and on its
+            <span class="vocab" data-vn="dung lượng (băng thông)">capacity (its ‘bandwidth’)</span>. The trick is to
+            find ways of <span class="vocab" data-vn="đóng gói (mã hóa) thông tin">packaging up – ‘coding’ –
+                information</span> to <span class="vocab" data-vn="đối phó với những tàn phá / tác hại">cope with the
+                ravages</span> of noise.<br><br>
+
+            <b>E.</b> Over the years scientists have <span class="vocab"
+                data-vn="phát minh ra nhiều phương pháp">devised many such methods</span>, and they have <span
+                class="vocab" data-vn="tỏ ra cực kỳ quan trọng">proved crucial in</span> many <span class="vocab"
+                data-vn="kỳ tích công nghệ">technological feats</span>. The Voyager spacecraft transmitted data using
+            codes which added one <span class="vocab" data-vn="bit bổ sung">extra bit</span> for every single bit of
+            information; the result was an <span class="vocab" data-vn="tỷ lệ lỗi">error rate</span> of just one bit in
+            10,000 – and <span class="vocab" data-vn="hình ảnh rõ nét đến kinh ngạc">stunningly clear pictures</span>.
+            Other codes have become <span class="vocab" data-vn="một phần của cuộc sống hàng ngày">part of everyday
+                life</span> – such as the <span class="vocab" data-vn="mã vạch">bar code</span>, which uses a simple
+            <span class="vocab" data-vn="hệ thống phát hiện lỗi">error-detecting system</span> that ensures lasers can
+            read the price even on a <span class="vocab" data-vn="túi khoai tây chiên bị nhăn nheo">crumpled bag of
+                crisps</span>. Engineers made a <span class="vocab" data-vn="đột phá lớn">major breakthrough</span> by
+            discovering so-called <span class="vocab" data-vn="mã turbo">turbo codes</span> – which play a <span
+                class="vocab" data-vn="đóng vai trò then chốt">key role in</span> the mobile videophone
+            revolution.<br><br>
+
+            <b>F.</b> Shannon also <span class="vocab" data-vn="đặt nền móng cho">laid the foundations of</span> more
+            <span class="vocab" data-vn="cách lưu trữ hiệu quả">efficient ways of storing</span> information, by <span
+                class="vocab" data-vn="loại bỏ những bit thừa">stripping out superfluous (‘redundant’) bits</span> from
+            data which <span class="vocab" data-vn="đóng góp ít thông tin thực tế">contributed little real
+                information</span>. As text messages show, it is often possible to <span class="vocab"
+                data-vn="lược bỏ rất nhiều dữ liệu">leave out a lot of data</span> without <span class="vocab"
+                data-vn="mất đi nhiều ý nghĩa">losing much meaning</span>. However, there’s a limit beyond which
+            messages become <span class="vocab" data-vn="quá mơ hồ / nhập nhằng">too ambiguous</span>. Shannon showed
+            how to calculate this limit, <span class="vocab" data-vn="mở đường cho">opening the way to</span> the thiết
+            kế của các <span class="vocab" data-vn="phương pháp nén">compression methods</span> that <span class="vocab"
+                data-vn="nhồi nhét tối đa thông tin">cram maximum information</span> into the <span class="vocab"
+                data-vn="không gian tối thiểu">minimum space</span>.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(11)">🔊 Đọc Passage 11</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab12" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 12<br>The History of Pencil</h1>
+        <div class="passage" id="passage12">
+            The beginning of the story of pencils started with a lightning. <span class="vocab"
+                data-vn="Than chì">Graphite</span>, the <span class="vocab" data-vn="nguyên liệu chính">main
+                material</span> for producing pencil, was discovered in 1564 when a lightning struck a local tree. Local
+            people found out that the <span class="vocab" data-vn="chất màu đen">black substance</span> <span
+                class="vocab" data-vn="được phát hiện tại">spotted at</span> the root of the <span class="vocab"
+                data-vn="cái cây không may mắn">unlucky tree</span> was different from burning ash of wood. It was soft,
+            thus <span class="vocab" data-vn="để lại dấu vết">left marks</span> everywhere. Chemistry was <span
+                class="vocab" data-vn="vừa mới ra đời / còn non trẻ">barely out of its infancy</span> at the time, so
+            people <span class="vocab" data-vn="nhầm nó với chì">mistook it for lead</span>. It was soon <span
+                class="vocab" data-vn="được đưa vào sử dụng">put to use</span> by locals in marking their sheep for
+            <span class="vocab" data-vn="quyền sở hữu và tính toán">ownership and calculation</span>.<br><br>
+
+            Britain <span class="vocab" data-vn="hóa ra là">turns out to be</span> major country where <span
+                class="vocab" data-vn="các mỏ than chì">mines of graphite</span> can be <span class="vocab"
+                data-vn="phát hiện và khai thác">detected and developed</span>. Even so, the first pencil was <span
+                class="vocab" data-vn="được phát minh ở nơi khác">invented elsewhere</span>. As graphite is soft, it
+            requires some form of <span class="vocab" data-vn="vỏ bọc">encasement</span>. In Italy, graphite sticks were
+            initially <span class="vocab" data-vn="được quấn bằng dây">wrapped in string</span> or sheepskin for <span
+                class="vocab" data-vn="sự ổn định / chắc chắn">stability</span>. Then around 1560, an Italian couple
+            made what are likely the first <span class="vocab" data-vn="bản thiết kế">blueprints</span> for the modern,
+            <span class="vocab" data-vn="được bọc gỗ">wood-encased</span> <span class="vocab"
+                data-vn="bút chì thợ mộc">carpentry pencil</span>. Their concept involved the <span class="vocab"
+                data-vn="việc khoét rỗng">hollowing out</span> of a stick of juniper wood. Shortly thereafter, a <span
+                class="vocab" data-vn="kỹ thuật ưu việt hơn">superior technique</span> was discovered: two <span
+                class="vocab" data-vn="hai nửa bằng gỗ">wooden halves</span> were carved, a graphite stick <span
+                class="vocab" data-vn="được chèn vào">inserted</span>, and the halves then <span class="vocab"
+                data-vn="được dán lại với nhau">glued together</span>.<br><br>
+
+            Although <span class="vocab" data-vn="lõi than chì">graphite core</span> in pencils is still <span
+                class="vocab" data-vn="được gọi là chì">referred to as lead</span>, modern pencils do not contain lead.
+            The “lead” is actually a mix of <span class="vocab" data-vn="than chì nghiền mịn">finely ground
+                graphite</span> and <span class="vocab" data-vn="bột sét">clay powders</span>. This mixture is important
+            because the amount of clay added <span class="vocab" data-vn="phụ thuộc vào độ cứng mong muốn">depends on
+                the intended hardness</span>. The more clay you put in, <span class="vocab"
+                data-vn="độ cứng của lõi càng cao">the higher hardness the core has</span>. Many pencils are <span
+                class="vocab" data-vn="được phân loại theo hệ thống châu Âu">graded on the European system</span>. This
+            system used B for black and H for hard; a pencil’s grade was described by a <span class="vocab"
+                data-vn="một chuỗi các ký tự">sequence</span> of Hs or Bs. The <span class="vocab"
+                data-vn="bút chì viết tiêu chuẩn">standard writing pencil</span> is graded HB.<br><br>
+
+            In England, pencils continue to be made from <span class="vocab"
+                data-vn="than chì nguyên khối được cưa ra">whole sawn graphite</span>. But with the <span class="vocab"
+                data-vn="sản xuất hàng loạt">mass production</span> of pencils, they are getting <span class="vocab"
+                data-vn="phổ biến một cách mạnh mẽ">drastically more popular</span>. As demands rise, <span
+                class="vocab" data-vn="nhu cầu về than chì tăng vọt">appetite for graphite soars</span>.<br><br>
+
+            According to the USGS, world production of <span class="vocab" data-vn="than chì tự nhiên">natural
+                graphite</span> in 2012 was 1,100,000 tonnes. However, <span class="vocab"
+                data-vn="trái ngược hoàn toàn với">much in contrast with</span> its <span class="vocab"
+                data-vn="ứng dụng trí tuệ">intellectual application</span>, graphite was also <span class="vocab"
+                data-vn="được sử dụng rộng rãi trong quân sự">widely used in the military</span>. It was used as a <span
+                class="vocab" data-vn="vật liệu chịu nhiệt">refractory material</span> to <span class="vocab"
+                data-vn="lót khuôn đúc đạn đại bác">line moulds for cannonballs</span>, resulting in <span class="vocab"
+                data-vn="đạn tròn hơn, mịn hơn">rounder, smoother balls</span> that could be <span class="vocab"
+                data-vn="bắn xa hơn">fired farther</span>. This <span class="vocab"
+                data-vn="mỏ than chì đặc biệt này">particular deposit of graphite</span> was extremely pure and soft.
+            Because of its <span class="vocab" data-vn="tầm quan trọng về quân sự">military importance</span>, this
+            unique mine was <span class="vocab" data-vn="được kiểm soát nghiêm ngặt bởi Hoàng gia">strictly controlled
+                by the Crown</span>.<br><br>
+
+            That the US did not use pencils in outer space is in fact a <span class="vocab"
+                data-vn="một câu chuyện hư cấu">fiction</span>. It is <span class="vocab"
+                data-vn="được biết đến rộng rãi rằng">widely known that</span> Russian astronauts used <span
+                class="vocab" data-vn="bút chì sáp / bút chì dầu">grease pencils</span>, which don’t have <span
+                class="vocab" data-vn="vấn đề gãy vỡ">breakage problem</span>. Their <span class="vocab"
+                data-vn="đối tác (đồng nghiệp bên Mỹ)">counterparts</span> in the US preferred <span class="vocab"
+                data-vn="bút chì kim / bút chì cơ">mechanical pencils</span>, which produced <span class="vocab"
+                data-vn="nét vẽ mảnh / sắc nét">fine line</span>, much clearer than the <span class="vocab"
+                data-vn="nét vẽ bị nhòe">smudgy lines</span>. But the <span class="vocab" data-vn="đầu ngòi chì">lead
+                tips</span> broke often. A bit of graphite <span class="vocab"
+                data-vn="trôi nổi quanh khoang tàu">floating around the space capsule</span> could <span class="vocab"
+                data-vn="lọt vào máy móc">find its way into machinery</span>, causing an <span class="vocab"
+                data-vn="chập điện">electrical short</span>.<br><br>
+
+            <span class="vocab" data-vn="Trong bối cảnh của">Against the backcloth of</span> a <span class="vocab"
+                data-vn="thế giới kỹ thuật số">digitalized world</span>, the <span class="vocab"
+                data-vn="triển vọng của bút chì">prospect of pencils</span> dường như <span class="vocab"
+                data-vn="ảm đạm">bleak</span>. In reality, it does not. The <span class="vocab"
+                data-vn="việc ứng dụng bút chì">application of pencils</span> has by now become <span class="vocab"
+                data-vn="rất phổ biến / lan rộng">so widespread</span>. A <span class="vocab"
+                data-vn="nhiều đối tượng người dùng khác nhau">spectrum of users</span> are likely to continue to use
+            it: artists to draw on <span class="vocab" data-vn="tập giấy phác thảo">sketch pads</span>, and architects
+            to produce <span class="vocab" data-vn="bản vẽ thiết kế">blue prints</span>. The <span class="vocab"
+                data-vn="khả năng dường như là vô tận">possibilities seem limitless</span>.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(12)">🔊 Đọc Passage 12</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab13" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 13<br>Robert Louis Stevenson</h1>
+        <div class="passage" id="passage13">
+            Scottish novelist, poet, essayist, and <span class="vocab" data-vn="người viết du ký">travel writer</span>,
+            Robert Louis Stevenson was born in Edinburgh, Scotland. It has been <span class="vocab"
+                data-vn="hơn 100 năm kể từ khi">more than 100 years since</span> his death. Stevenson was a writer who
+            <span class="vocab" data-vn="gây ra nhiều ý kiến trái chiều">caused conflicting opinions</span> <span
+                class="vocab" data-vn="về tác phẩm của mình">about his works</span>. On one hand, he was often <span
+                class="vocab" data-vn="được ca ngợi hết lời">highly praised</span>
+            for his <span class="vocab" data-vn="văn xuôi và phong cách điêu luyện">expert prose and style</span>. On
+            the other hand, others criticised the <span class="vocab" data-vn="chủ đề tôn giáo">religious themes</span>
+            in his works. Since his death <span class="vocab" data-vn="một thế kỷ trước">a century before</span>,
+            critics <span class="vocab" data-vn="và các nhà tiểu sử đã">and biographers have</span> <span class="vocab"
+                data-vn="không đồng nhất về di sản">disagreed on the
+                legacy</span> of Stevenson’s writing. Two biographers <span class="vocab"
+                data-vn="tập trung rõ rệt vào">wrote with a clear focus</span>, choosing not to criticise <span
+                class="vocab" data-vn="các khía cạnh của đời tư">aspects of personal life</span>.<br><br>
+
+            The <span class="vocab" data-vn="con lắc văn học (sự thay đổi quan điểm)">literary pendulum</span> has swung
+            these days. Stevenson’s works have <span class="vocab"
+                data-vn="chịu đựng sự chỉ trích tiêu cực kéo dài">sustained a wide variety of negative criticism</span>
+            throughout his life. It was like a <span class="vocab" data-vn="sự đảo cực hoàn toàn">complete reversal of
+                polarity</span> — from highly positive to clearly negative. He became an example of an author with <span
+                class="vocab" data-vn="đạo đức suy đồi">corrupt ethics</span> and <span class="vocab"
+                data-vn="thiếu tính luân thường">lack of moral</span>. Many critics <span class="vocab"
+                data-vn="xem nhẹ tác phẩm như là">passed his works off as</span> children’s stories and thought they had
+            <span class="vocab" data-vn="ít giá trị xã hội">little social value</span>. Stevenson’s works were often
+            <span class="vocab" data-vn="bị loại khỏi chương trình giảng dạy">excluded from literature curriculum</span>
+            because of its <span class="vocab" data-vn="tính chất gây tranh cãi">controversial nature</span>. Critics
+            still <span class="vocab" data-vn="khẳng định rằng">assert</span> that his works <span class="vocab"
+                data-vn="thiếu giá trị đạo đức">lack moral value</span>.<br><br>
+
+            One of the <span class="vocab" data-vn="lý do chính tại sao">main reasons why</span> his works attracted so
+            much criticism was due to the <span class="vocab" data-vn="thể loại sáng tác">genre of his writing</span>.
+            Stevenson mainly wrote adventure stories, which was part of a <span class="vocab"
+                data-vn="trào lưu viết lách phổ biến">popular writing fad</span> at the time. Adventure stories offer
+            <span class="vocab" data-vn="nhân vật lôi cuốn">engaging characters</span>, action, and mystery but <span
+                class="vocab" data-vn="không thể dạy các nguyên tắc đạo đức">ultimately can’t teach moral
+                principles</span>. The <span class="vocab" data-vn="các tình tiết cốt truyện">plot points</span> are
+            <span class="vocab" data-vn="một chiều (đơn giản)">one-dimensional</span>, instead focusing on <span
+                class="vocab" data-vn="những bước ngoặt gây sốc">shocking plot twists</span> and <span class="vocab"
+                data-vn="các sự kiện ly kỳ">thrilling events</span>. Stevenson’s Scottish identity was an <span
+                class="vocab" data-vn="phần không thể tách rời">integral part</span> of his written works.<br><br>
+
+            While many critics <span class="vocab" data-vn="đề cao / tôn sùng">exalt</span> Sir Walter Scott as a <span
+                class="vocab" data-vn="thiên tài văn học">literary genius</span> because of his <span class="vocab"
+                data-vn="khả năng kỹ thuật">technical ability</span>, others argue that Stevenson deserves the <span
+                class="vocab" data-vn="sự công nhận tương đương">same recognition</span> for his <span class="vocab"
+                data-vn="khả năng thiên bẩm">natural ability</span>. Many of Scott’s works were <span class="vocab"
+                data-vn="được xem xét nghiêm túc hơn">taken more seriously</span> as literature for their depth due to
+            their <span class="vocab" data-vn="chủ đề bi kịch">tragic themes</span>. Stevenson’s works <span
+                class="vocab" data-vn="khắc họa cuộc sống thường nhật">captured the unique day to day life</span> of
+            average Scottish people. Some critics point to this as a <span class="vocab"
+                data-vn="một thiếu sót / khiếm khuyết">flaw</span>, arguing that truly important literature should <span
+                class="vocab" data-vn="vượt lên trên văn hóa địa phương">transcend local culture</span>. However, others
+            praise the <span class="vocab" data-vn="hương vị địa phương">local taste</span> of his literature, providing
+            <span class="vocab" data-vn="cái nhìn giá trị về">valuable insight to</span> life in Scotland during the
+            19th century.<br><br>
+
+            Stevenson’s <span class="vocab" data-vn="đời tư">personal life</span> often attracted a lot of attention,
+            and some argue it eventually <span class="vocab" data-vn="lấn át / tỏa sáng hơn cả sự nghiệp">outshone his
+                writing</span>. He had been <span class="vocab" data-vn="bị hành hạ bởi các vấn đề sức khỏe">plagued
+                with health problems</span> his whole life, and often had to live in <span class="vocab"
+                data-vn="khí hậu ấm áp hơn">much warmer climates</span> than the <span class="vocab"
+                data-vn="thời tiết ảm đạm">dreary weather</span> of Scotland. He took his family to Samoa, which was a
+            <span class="vocab" data-vn="quyết định gây tranh cãi">controversial decision</span>. The sea air <span
+                class="vocab" data-vn="hợp với các chủ đề">complimented the themes</span> of his writing. Stevenson
+            <span class="vocab" data-vn="có niềm đam mê dịch chuyển">gained a love of travelling</span> and <span
+                class="vocab" data-vn="đi lang thang / ngao du">wandered</span> the eastern and central Pacific for
+            nearly three years. As a result, the feeling grew that <span class="vocab"
+                data-vn="mối quan tâm đến cuộc đời">interest in Stevenson’s life</span> had <span class="vocab"
+                data-vn="thay thế cho">taken the place of</span> interest in his works. He remains a <span class="vocab"
+                data-vn="nhân vật gây tranh cãi nhưng phổ biến">controversial yet widely popular figure</span> in
+            Western literature.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(13)">🔊 Đọc Passage 13</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab14" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 14<br>Sleep Study on Modern-Day Hunter-Gatherer</h1>
+        <div class="passage" id="passage14">
+            Modern life’s sleep troubles – the <span class="vocab" data-vn="trạng thái lờ đờ kinh niên">chronic
+                bleary-eyed state</span> – have long been <span class="vocab"
+                data-vn="đổ lỗi cho xã hội công nghiệp">blamed on our industrial society</span>. Researchers have had a
+            tendency to <span class="vocab" data-vn="tìm về quá khứ / nhớ lại">hark back to</span> a simpler time. It
+            turns out that may not be <span class="vocab" data-vn="hoàn toàn đúng">quite right</span>. In fact, our
+            ancestors may not have been getting the <span class="vocab"
+                data-vn="8 tiếng ngủ theo khuyến nghị của bác sĩ">doctor-recommended eight hours</span> of sleep,
+            either.<br><br>
+
+            In an <span class="vocab" data-vn="nghiên cứu hấp dẫn">intriguing study</span>, researchers traveled to
+            <span class="vocab" data-vn="những góc xa xôi của hành tinh">remote corners of the planet</span> to <span
+                class="vocab" data-vn="nghiên cứu kỹ lưỡng">scrutinize</span> the sleep patterns of the world’s last
+            remaining <span class="vocab" data-vn="người săn bắt hái lượm">hunter-gatherers</span>. <span class="vocab"
+                data-vn="Tách biệt khỏi điện">Cut off from electricity</span>, these <span class="vocab"
+                data-vn="xã hội tiền công nghiệp">pre-industrial societies</span> are thought to experience the same
+            <span class="vocab" data-vn="giấc ngủ tự nhiên">natural sleep</span> ancient humans enjoyed.<br><br>
+
+            Using <span class="vocab" data-vn="thiết kế y tế chuyên dụng">medical-grade</span> devices, researchers
+            recorded the habits of 94 tribespeople. What they found was a <span class="vocab"
+                data-vn="sự thống nhất đáng ngạc nhiên">striking uniformity</span> in their sleep patterns despite their
+            <span class="vocab" data-vn="sự cách biệt về địa lý">geographic isolation</span>. On average, they sleep
+            <span class="vocab" data-vn="ít hơn 6,5 tiếng">little less than 6.5 hours</span> a night, <span
+                class="vocab" data-vn="không ngủ trưa">do not take naps</span> and do not go to sleep <span
+                class="vocab" data-vn="ngay khi trời tối">when it gets dark</span>. This suggests that sleep may not be
+            environmental, but <span class="vocab" data-vn="cốt lõi đối với sinh lý học">central to the
+                physiology</span> of humans.<br><br>
+
+            “The short sleep in <span class="vocab" data-vn="những quần thể này">these populations</span> <span
+                class="vocab" data-vn="thách thức niềm tin rằng">challenges the belief</span> that sleep has been <span
+                class="vocab" data-vn="bị giảm đi đáng kể">greatly reduced</span> in the modern world,” Siegel said.
+            This has <span class="vocab" data-vn="hệ quả quan trọng cho">important implications for</span> the idea that
+            we need <span class="vocab" data-vn="thuốc ngủ">sleeping pills</span>. The findings <span class="vocab"
+                data-vn="nghi vấn / đặt câu hỏi cho">call into question</span> why “short” sleepers get only six hours
+            and the idea that <span class="vocab" data-vn="thiếu ngủ">lack of sleep</span> is a big reason for <span
+                class="vocab" data-vn="béo phì và rối loạn tâm trạng">obesity and mood disorders</span>.<br><br>
+
+            Scientists have long documented that people tend to “<span class="vocab"
+                data-vn="cạn kiệt năng lượng">crash</span>” in energy in the <span class="vocab"
+                data-vn="giữa buổi chiều">midafternoon</span>. Some <span class="vocab"
+                data-vn="suy đoán / dự đoán">speculated</span> it is because we <span class="vocab"
+                data-vn="kìm nén nhu cầu bẩm sinh">suppress some innate need</span> for a <span class="vocab"
+                data-vn="giấc ngủ trưa (siesta)">siesta</span>. The new study provides evidence this is <span
+                class="vocab" data-vn="khó có thể xảy ra">unlikely</span>. Napping is not really a <span class="vocab"
+                data-vn="điều phổ biến">common thing</span> among hunter-gatherers, either.<br><br>
+
+            Another <span class="vocab" data-vn="phát hiện thú vị">fascinating finding</span> had to do with the <span
+                class="vocab" data-vn="nhịp sinh học">circadian rhythms</span> related to sunlight. Instead of going to
+            sleep <span class="vocab" data-vn="ngay lúc chạng vạng">right at dusk</span>, they were sleeping well after
+            <span class="vocab" data-vn="bóng tối bao trùm">darkness had fallen</span>. <span class="vocab"
+                data-vn="Nhiệt độ môi trường">Ambient temperature</span> may <span class="vocab"
+                data-vn="đóng vai trò lớn">play a big role</span>. <span class="vocab"
+                data-vn="Sự bắt đầu giấc ngủ">Sleep initiation</span> occurred during the period of <span class="vocab"
+                data-vn="nhiệt độ giảm xuống">decreasing temperature</span>, and <span class="vocab"
+                data-vn="thời điểm thức dậy">wake onset</span> occurred near the <span class="vocab"
+                data-vn="điểm thấp nhất">nadir</span> of the daily temperature rhythm.<br><br>
+
+            It should be <span class="vocab" data-vn="cần lưu ý rằng">noted that</span> these tribespeople <span
+                class="vocab" data-vn="khác biệt ở một số phương diện">different in a number of respects</span>. Very
+            few suffer from <span class="vocab" data-vn="mất ngủ kinh niên">chronic insomnia</span>. In fact, there is
+            not even a word for it in their languages. Siegel suggested that <span class="vocab"
+                data-vn="mô phỏng các khía cạnh của môi trường tự nhiên">mimicking aspects of the natural
+                environment</span> may be <span class="vocab" data-vn="có hiệu quả trong việc điều trị">effective in
+                treating</span> sleep disorders.<br><br>
+
+            The hunter-gatherers are also much healthier. <span class="vocab" data-vn="Không một ai bị béo phì">Not a
+                single one is obese</span>. They also have lower blood pressure and <span class="vocab"
+                data-vn="mức độ thể chất cao hơn">higher levels of physical fitness</span>. Thus comes a <span
+                class="vocab" data-vn="câu hỏi then chốt">critical question</span>: If we cannot blame lack of sleep,
+            could the reason we feel <span class="vocab" data-vn="không được nghỉ ngơi đầy đủ">so unrested</span> be
+            because of <span class="vocab" data-vn="sức khỏe kém">poor health</span>?
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(14)">🔊 Đọc Passage 14</button>
+            <button onclick="stopReading()">⏹ Dừng</button>
+        </div>
+    </div>
+
+    <div id="tab15" class="content tab-content" style="display:none;">
+        <h1>READING PASSAGE 15<br>Nanotechnology: Its Development and Uses</h1>
+        <div class="passage" id="passage15">
+            <b>A.</b> Nanotechnology has been <span class="vocab" data-vn="được ca ngợi như là">hailed by many as</span>
+            being a <span class="vocab" data-vn="phép màu khoa học">miracle of science</span>. Essentially,
+            nanotechnology is <span class="vocab" data-vn="kỹ thuật ở cấp độ nguyên tử">engineering at the atomic
+                level</span>. Scientists work with <span class="vocab"
+                data-vn="các hạt siêu nhỏ (hạt nano)">nanoparticles</span> which may measure no more than a <span
+                class="vocab" data-vn="một phần tỷ mét">billionth of a metre</span>. Whilst some substances <span
+                class="vocab" data-vn="có nguồn gốc từ">derived from</span> carbon compounds are manufactured, others
+            are <span class="vocab" data-vn="tự nhiên tồn tại">naturally-occurring</span> or arise as a <span
+                class="vocab" data-vn="tác dụng phụ / sản phẩm phụ">by-product</span>. What makes these substances of
+            such interest is that their <span class="vocab" data-vn="kích thước cực nhỏ">minute size</span> <span
+                class="vocab" data-vn="tạo điều kiện thuận lợi cho">facilitates</span> processes that would otherwise be
+            impossible.<br><br>
+
+            <b>B.</b> It may be something of a <span class="vocab" data-vn="sự tiết lộ / điều bất ngờ">revelation</span>
+            to learn that nanotechnology is far from <span class="vocab" data-vn="khoa học tiên tiến nhất">cutting-edge
+                science</span>. In fact, the idea was first <span class="vocab" data-vn="được nhắc đến">referred
+                to</span> in an <span class="vocab" data-vn="bài giảng có sức ảnh hưởng">influential lecture</span> by
+            Richard Feynman in 1959. Feynman <span class="vocab" data-vn="phác thảo khái niệm cơ bản">outlined the basic
+                concept</span>. He <span class="vocab" data-vn="hình dung / dự tính">envisaged</span> a process
+            involving the building of a set of <span class="vocab" data-vn="các công cụ chính xác">precise tools</span>
+            to build another <span class="vocab" data-vn="nhỏ hơn theo tỷ lệ tương ứng">proportionally smaller
+                set</span>. The building of <span class="vocab" data-vn="những công cụ ngày càng nhỏ">increasingly
+                minute tools</span> would in turn produce <span class="vocab"
+                data-vn="vật liệu siêu hiển vi">ultra-microscopic materials</span>.<br><br>
+
+            <b>C.</b> Strangely, what should have <span class="vocab" data-vn="khơi mào cuộc cách mạng">sparked a
+                revolution</span> was then <span class="vocab" data-vn="hầu như bị lãng quên">virtually forgotten</span>
+            for 15 years. In 1974, Norio Taniguchi <span class="vocab" data-vn="giới thiệu lại lý thuyết">reintroduced
+                Feynman’s theory</span>. However, it wasn’t until the 1980s that the <span class="vocab"
+                data-vn="mở đường cho">way was paved</span> for nanotechnology to leave the <span class="vocab"
+                data-vn="lĩnh vực khoa học lý thuyết">realm of theoretical science</span> and become reality. The
+            invention of the <span class="vocab" data-vn="Kính hiển vi quét xuyên hầm (STM)">Scanning Tunnelling
+                Microscope</span>, combined with the discovery of <span class="vocab"
+                data-vn="các hạt Fullerene">fullerenes</span>, were to <span class="vocab"
+                data-vn="chứng minh là một bước ngoặt">prove a turning point</span>.<br><br>
+
+            <b>D.</b> Fullerenes possess <span class="vocab" data-vn="tính chất hóa lý">chemical and physical
+                properties</span> of huge interest. They are used as <span class="vocab"
+                data-vn="tác nhân kháng khuẩn">antimicrobial agents</span> and for several <span class="vocab"
+                data-vn="ứng dụng y sinh">biomedical applications</span>, from <span class="vocab"
+                data-vn="chụp X-quang">X-ray imaging</span> to treating cancer by <span class="vocab"
+                data-vn="nhắm mục tiêu vào các tế bào">targeting cells</span>. They are also used in <span class="vocab"
+                data-vn="kem chống nắng">sunscreen</span> and <span class="vocab" data-vn="mỹ phẩm">cosmetics</span>.
+            Nanoparticles are also effective in <span class="vocab" data-vn="làm sạch môi trường">environmental
+                clean-ups</span> of <span class="vocab" data-vn="vết dầu loang">oil slicks</span>. Their remarkable
+            properties are down to: their greater <span class="vocab"
+                data-vn="tỷ lệ diện tích bề mặt trên trọng lượng">surface-to-weight ratio</span> and their ability to
+            <span class="vocab" data-vn="xuyên qua màng tế bào">penetrate cell membranes</span>.<br><br>
+
+            <b>E.</b> Despite these properties, nanotechnology has <span class="vocab"
+                data-vn="vẫn chưa giành được sự chấp nhận">yet to win universal acceptance</span>. The very properties
+            that make them valuable also make them <span class="vocab" data-vn="có tiềm năng gây độc">potentially
+                toxic</span>. Such properties are <span class="vocab" data-vn="có khả năng gây chết người">potentially
+                lethal</span> if <span class="vocab" data-vn="chất độc">toxic substances</span> attach themselves to
+            nanoparticles, delivering a <span class="vocab" data-vn="độc tố chết người">fatal toxin</span> into the
+            cells. Their size permits them to <span class="vocab" data-vn="đi vào máu">enter the bloodstream</span>. The
+            body has no <span class="vocab" data-vn="hệ thống miễn dịch tự nhiên">natural immune system</span> to deal
+            with these particles. <span class="vocab" data-vn="Những người hoài nghi">Sceptics</span> are not yet
+            convinced that the <span class="vocab" data-vn="tác dụng phụ tiềm ẩn">potential side effects</span> are
+            <span class="vocab" data-vn="được bù đắp bởi những lợi thế">compensated for by the advantages</span>.
+            However, some believe that <span class="vocab" data-vn="các quy định pháp lý">regulations</span> can <span
+                class="vocab" data-vn="giảm thiểu rủi ro">minimise such risks</span>, and that risks are <span
+                class="vocab" data-vn="bị lấn át hoàn toàn bởi lợi ích">vastly outweighed by potential benefits</span>.
+        </div>
+
+        <div style="text-align:center; margin:40px 0;">
+            <button onclick="readPassage(15)">🔊 Đọc Passage 15</button>
             <button onclick="stopReading()">⏹ Dừng</button>
         </div>
     </div>
